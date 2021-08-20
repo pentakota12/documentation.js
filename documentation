@@ -1,3961 +1,1696 @@
-BACKGROUND SERVER
-## 1)Command 1300-DynamicSceneAdded
-## 2)Command 1300-DynamicSceneActivated
-## 3)Command 1300-DynamicSceneUpdated
-## 4)Command 1300-DynamicSceneRemoved
-## 5)Command 1050-AlmondProperties 
-## 6)Command 1200-DynamicDeviceAdded
-## 7)Command 1500-DynamicClientList
-## 8)Command 1500-DynamicClientUpdated 
-## 9)Command 1500-DynamicClientAdded
-## 10)Command 1500-DynamicAllClientsRemoved
-## 11)Command 1200-DynamicDeviceList
-## 12)Command 1200-DynamicIndexUpdated
-## 13)Command 1500-DynamicClientRemoved
-## 14)Command 1200-DynamicDeviceRemoved
-## 15)Command 49-DynamicAlmondNameChange
-## 16)Command 153-DynamicAlmondModeChangeRequest
-## 17)Command 1200-DynamicAllDevicesRemoved
-## 18)Command 1500-DynamicClientJoined 
-## 19)Command 1500-DynamicClientLeft
-## 20)Command 1400-DynamicRuleAdded
-## 21)Command 1400-DynamicRuleUpdated
-## 22)Command 1400-DynamicRuleRemoved
-## 23)Command 1400-DynamicAllRulesRemoved
-## 24)Command 1200-DynamicDeviceUpdated
-## 25)Command 1300-DynamicAllSceneRemoved
+Visual studio code shortcuts: I=76900/-   T=81672/-   https://www.chittorgarh.com/report/ipo-in-india-list-main-board-sme/82/?year=2019
+pswd : RAHUL@capgemini1234      
+1. If we want to open the terminal 
+   --> ctrl+shift+backtick
+2. If we want to open a terminal under the terminal 
+   --> ctrl+shift+5
+3. If we want to search a file exactly
+   --> ctrl+p
+4. If we want to search a word in the file 
+   --> ctrl+f
+5. If we want to open a new window 
+   --> ctrl+shift+n
+6. If we want to close the instance window
+   --> ctrl+shift+w
+7. If we want to copy the line without selection
+   --> ctrl+c
+8. If we want to cut the line without  selection
+   --> ctrl+x
+9. If we want to delete the line without selection
+   --> ctrl+shift+k
+10. If we want to know the closing bracket or from closing bracket to open bracket
+   --> ctrl+shift+\
+11. If we want to go to at required line 
+   --> ctrl+g
+12. If we want to remove only comments
+   -->ctrl+k+ctrl+u
+13. If we want to go to back
+   --> ctrl+z
+14. If we want to write any commet for code
+   --> shift+alt+a
+15. If we want to select the line without dragging through mouse
+   --> ctrl+l
+16. If we want to replace any word in the document
+   --> ctrl+f  then ctrl+h
+17. If we want to change the theme of the vscode editor
+   --> ctrl+k+ctrl+t
+18. If we want to navigate the history
+   --> ctrl+tab
+19. If we want to put the code as a format way
+   --> ctrl+k+ctrl+f
+20. If we want to close the side tab
+   --> ctrl+b
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Postgresql concepts:
+========================================= Install pgAdmin4 on Ubuntu =========================================
 
-<a name="1300a"></a>
-command type:DynamicSceneAdded
-## 1)Command 1300
-   Command no
-   1300- JSON format
+//1.Step 1 – Enable PostgreSQL Apt Repository
 
-   Required
-   Command,CommandType,Payload,almondMAC
+	Start with the import of the GPG key for PostgreSQL packages.
 
-   SQL
-   2.Insert on AlmondplusDB.SCENE
-   params:AlmondMAC
+	$ sudo apt-get install wget ca-certificates
+	$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-   Functional
-   1.Command 1300
+	Now add the repository to your system.
 
-   Flow
-   socket(packet)->controller->processor->genericModel(execute)->genericModel(add)->insertUpdate.
+	$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 
+Step 2 – Install PostgreSQL on Ubuntu
 
-<a name="1300b"></a>
-command type:DynamicSceneActivated
-## 2)Command 1300
-   Command no
-   1300- JSON format
+	$ sudo apt-get update
+	$ sudo apt-get install postgresql postgresql-contrib
 
-   Required
-   Command,CommandType,Payload,almondMAC
+Step 3 – Connect to PostgreSQL
 
-   SQL
-   2.Insert on AlmondplusDB.SCENE
-   params:AlmondMAC
+	$ sudo su - postgres 
+        $ psql
 
-   Functional
-   1.Command 1300
+Note : To get connection info  -> $ \conninfo
+       To exit from PostgreSQL -> $ \q
 
-   Flow
-   socket(packet)->controller->processor->genericModel(execute)->genericModel(Update)-> genericModel(add)
+Step 4 – Set your Username and Password for to create any new DB
 
+	 ALTER USER postgres PASSWORD '< Your password >';
 
-<a name="1300c"></a>
-command type:DynamicSceneUpdated
-## 3)Command 1300
-   Command no
-   1300- JSON format
+Reference Link - https://tecadmin.net/install-postgresql-server-on-ubuntu/
 
-   Required
-   Command,CommandType,Payload,almondMAC
+Refernce link : installation postgres with postgis:
+link : https://www.vultr.com/docs/install-the-postgis-extension-for-postgresql-on-ubuntu-linux#:~:text=PostGIS%20is%20a%20spatial%20database,PostgreSQL%20versions%2011%20and%2012.
 
-   SQL
-   2.Insert on AlmondplusDB.SCENE
-   params:AlmondMAC
-   
-   Functional
-   1.Command 1300
+========================================== Web Interface for PostgreSQL ======================================
 
-   Flow
-   socket(packet)->controller->processor->genericModel(execute)->genericModel(update)->genericModel(add).
+Step 1 – Import the repository key.
 
+	$ sudo apt-get install curl ca-certificates
+	$ curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-   <a name="1300d"></a>
-command type:DynamicSceneRemoved
-## 4)Command 1300
-   Command no
-   1300- JSON format
+Step 2 – Update and install the pgadmin package.
 
-   Required
-   Command,CommandType,Payload,almondMAC
+	$ sudo apt-get update
+	$ sudo apt-get install pgadmin4
 
-   SQL
-   2.Delete from SCENE
-   params:AlmondMAC
+Step 3 – Command to run PostgreSQL in web.
 
-   Functional
-   1.Command 1300
+	$ pgadmin4
 
-   Flow
-   socket(packet)->controller->processor->genericModel(execute)>genericModel(remove).
+Reference Link - https://severalnines.com/blog/top-gui-tools-postgresql
+
+//2.  EXIT FROM PSQL COMMAND PROMPT : \q   or ctrl+D
+
+//3.  if we see existed databases in psql ==> \l
+
+//4.  if we want to know the current version of psql ==> psql -V  or psql --version
+
+//5.  if we want to start postgresql in terminal ==>  sudo -u postgres psql    then pswd
+
+//6.  if we want to access required database in terminal ==>   \c database name
   
-   
- <a name="1050"></a>
-## 5)AlmondProperties (Command 1050)
-   Command no
-   1050- JSON format
+//7.  if we want to see tables in the required database from terminal  ==>  \dt 
 
-   Required
-   Command,CommandType,Payload,almondMAC
+//8   if we want to see  '< postgres >'
 
-   SQL
-   3.SELECT on ALMONDPROPERTIES
-   params:AlmondMAC
+//9   if we want to uninstall pgadmin 3 : https://www.thelinuxfaq.com/ubuntu/ubuntu-17-04-zesty-zapus/pgadmin3?type=uninstall
 
-   4.UPDATE on AlmondProperties2
-   params:AlmondMAC
+--------------------------------------------------------------------------------------------------------------------------------------
 
-   5.select from NotificationID 
-   params:UserID 
+CONCEPTS OF MONGODB 
+1. FIND QUERY IN MONGODB WITH OR CONDITION
+EX:
+Message.find({$or:[{senderId:req.body.id},{receiverId:req.body.id}]},function(err,res){ console.log("response",res); })
 
-   17.Update on AlmondplusDB.NotificationID
-   params:RegID
+2. UPDATE Query 
+EX:
+ Message.update({_id:resp._id},{$set:{messageStatus:"seen"}},function(err,finalmsg){ 
+       })
 
-   18.Delete on AlmondplusDB.NotificationID               //if (oldRegid && oldRegid.length > 0)
-   params: RegI
+3. FIND QUERY WITH OR & AND CONDITION
+EX:
+ Message.find({ $or : [{$and: [{receiverId: req.params.id, senderId: senderId,deletingfriend:'value will be updated'}]}, {$and: [{receiverId: senderId, senderId:req.params.id,deletingfriend:'value will be updated'}]}]}).populate('media').populate('photo').exec(function (err, message) {
+   return res.json(message)
+    })
 
-   19.select from SCSIDB.CMSAffiliations CA,             // if (!MACS[data.almondMAC])
-                  lmondplusDB.AlmondUsers AU,
-                  SCSIDB.CMS CMS   
-   params: CA.CMSCode,AU.AlmondMAC                            
+4. populate the required filed
+EX: 
+parentId: { type: Schema.Types.ObjectId, ref: 'Message' }
 
-   Redis
-   2.hmset on AL_<data.AlmondMAC>                          // params: [redisKey[key], data[key]]
+5. and with or condition
+EX: Message.find({$and:[{$or:[sendmsgobj,recmsgobj]},{deletingMsgstatus:'value will be updated'}]}, function(err,docs){
 
-   6.hmget on AL_<almondMAC>                               // params: ["name"]
+6. Not equal to condition
+EX:{ isDeleted: { $ne: true } }
 
 
-   7.LPUSH on AlmondMAC_device                             // params: redisData
+1.All operator 
+  Ex : { tags: { $all: [ "ssl" , "security" ] } } (or)  Ex: { $and: [ { tags: "ssl" }, { tags: "security" } ] }
 
-   8.LTRIM on AlmondMAC_device                             // if (res > count + 1)
+2.elematch
+  Ex : db.scores.find(
+       { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
+                )
+3.inc operator
+  Ex: db.products.update(
+   { sku: "abc123" },
+   { $inc: { quantity: -2, "metrics.orders": 1 } }
+       )
 
-            (or)
+4.rename operator
+  Ex: db.students.update( { _id: 1 }, { $rename: { 'nickname': 'alias', 'cell': 'mobile' } } )
 
-   8.expire on AlmondMAC_device                             // if (res == 1)
+5.unset operator 
+  Ex : db.products.update(
+   { sku: "unknown" },
+   { $unset: { quantity: "", instock: "" } }
+     )
 
-   9. LPUSH on AlmondMAC_All                               //params: redisData
+6. update all elements in the array 
+  Ex : db.collection.update(
+   { myArray: [ 5, 8 ] },
+   { $set: { "myArray.$[]": 10 } },
+   { upsert: true }
+     )
 
-   10.LTRIM on AlmondMAC_All                               // if (res > count + 1)
-                 
-		 (or)
-		 
-   10.expire AlmondMAC_All                                // if (res == 1)
+7. pop operator
+  Ex: db.students.update( { _id: 1 }, { $pop: { scores: -1 } } )
 
-   postgres
-   11.INSERT INTO recentactivity
-      params:mac, id, time, index_id,index_name, name, type, value
+8. pull operator: it removes all the matched elements in the array
+  Ex: db.stores.update(
+    { },
+    { $pull: { fruits: { $in: [ "apples", "oranges" ] }, vegetables: "carrots" } },
+    { multi: true }
+       )
 
-   cassandra
-   14.INSERT INTO notification_store.notification_records
-      params:usr_id,noti_time,i_time,msg  
+9. position operator :
+   Ex:  db.students.update(
+   { _id: 1 },
+   {
+     $push: {
+        scores: {
+           $each: [ 50, 60, 70 ],
+           $position: 0
+          }
+        }
+       }
+      )
 
-   15.select from notification_store.badger
-      params:usr_id
+10. push operator in mongodb
+Ex:  Groups.findOneAndUpdate({$and:[{ orderId: data.orderId},{senderId:{$ne:data.senderId}}]}, { $push: { groupMembers: data.senderId } }, { new: true }, function (err, updatedres) {
+        console.log("updatedres2222", updatedres)
+         })
 
-   16.UPDATE notification_store.badger  
-      params:usr_id
+11. if we want to check the data in mongodb Array is there.
+Ex: {groupMembers:{$in:[data.senderId]}
 
-   Functional
-   1.Command 1050
+12. if we want to check the data in mongodb Array is not there.
+Ex: {groupMembers:{$nin:[data.senderId]}
 
-   12.delete ans.AlmondMAC;
-      delete ans.CommandType;
-      delete ans.Action;
-      delete ans.HashNow;
-      delete ans.Devices;
-      delete ans.epoch;
+13. If we want to push multiples values into mongodb array.
+EX:  Groups.findOneAndUpdate({userid:data.userid,receiverid:data.receiverid},{ $push:{groupMembers:{$each:[data.receiverid,uniqueId]}} }, { new: true }, function (err, updatedres) {
+         console.log("updatedres11111", updatedres)
+           });
+
+14. If we want to fetch the exact required fields from documents in mongodb
+Ex:    Groups.findOne({ userid: msgdata.userid, receiverid: msgdata.receiverid }).select("_id").lean().then(grpresp => { 
+          console.log(grpresp);
+           });
+
+15. addToSet --> operator adds a value to an array unless the value is already present
+ 
+16.createIndex in mongodb
+EX: db.members.createIndex( { "username": 1 }, { unique: true } )
+
+17.Position operator specifies the at which index position have to push the values into Array
+
+18. If we want to delete a particular field from the Document
+EX: db.items1.update( { _id: 1 },{ $unset: {"purqty": ""}})
+EX: db.items1.update({"op_stock":{$gte:100}}, { $unset: {"purqty": ""}},{ multi: true });
+
+19. If we want to check multiple values is there or not inside mongodb array.
+EX:   Groups.findOne({ groupMembers: { $all: [data.userid,data.receiverid]}}).select("_id").lean().then(result => {
+          console.log("result....", result);
+            });
+
+20. Mongodb Schema creation
+EX: var mongoose = require('mongoose');
+    var Schema = mongoose.Schema;
+    var schema = new Schema({...});
+    var model1 = mongoose.model('model1', schema);     
+
+21. Same schema for multiple collections
+EX: var mongoose = require('mongoose');
+    var Schema = mongoose.Schema;
+    var schema = new Schema({...});
+    var collection1 = mongoose.model('collection1', schema);  
+    var collection2 = mongoose.model('collection2', schema);
+
+
+22. If we want to remove multiple values from mongodb array:
+Ex: {$pullAll:{groupMembers:req.body.memberids}}
+
+23. If we want to restrict the duplicate values at the time of push the values into mongodb 
+EX: {$addToSet:{groupMembers:{$each:req.body.memberids}}}
+
+24. Aggregation in mongodb :
+  1. If we want to get specific required fields from document : $project : db.books.aggregate( [ { $project : { title : 1 , author : 1 } } ] )       
+                                                                                           (or)
+         							           db.books.aggregate( [ { $project : { _id: 0, title : 1 , author : 1 } } ] )
+											   (or)
+									   db.books.aggregate( [ { $project : { "author.first" : 0, "lastModified" : 0 } } ] )
+
+  2. $match --> db.articles.aggregate([ { $match : { author : "dave" } } ]);
+
+25. mongo schema data type is objectid : GroupId : { type : mongoose.Schema.Types.ObjectId, required: true },
+
+26. If we want to download data from robo 3t : https://json-csv.com/
+
+27. Aggregation findandupdate :    groupCreate.aggregate([{'$match': findQuery},{'$set':{'type':"gorup"}},{'$project': {'removedUsers': 0}}]).exec((err, resp)=>{
+     console.log("aggregateresp",resp)
+     });
+
+28. If we want to search find via search : link: https://stackoverflow.com/questions/41836552/how-to-find-all-documents-with-only-looking-at-first-letter-of-the-values-in-mon
+Ex: groupCreate.find({groupName: {$regex: '^' + req.body.groupName, $options: 'i'}},function(err,resp){ console.log("resp",resp) })
+
+                                               (or)
+Ex:groupCreate.aggregate([{'$match':{'groupName': {$regex: '^' + req.body.groupName, $options: 'i'}}}, {'$project': {groupName: 1}}]).exec((err, groupSearchResponse)=>{
+   console.log("groupSearchResponse",groupSearchResponse)
+     });
+
+29. sendGrid : https://sendgrid.com/docs/for-developers/sending-email/quickstart-nodejs/
+
+30: Based on id need to get the document : const ObjectID = require('mongodb').ObjectID;
+ 					   { _id: new ObjectID(userId) },
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Express concepts:
+http.post() -->
+http.get()  -->
+http.delete() -->
+http.patch() -->
+http.put() -->
+
+Express validation : https://express-validator.github.io/docs/custom-validators-sanitizers.html
+Ex: const { body, validationResult } = require('express-validator');
+    --> app.post('/group/create',body('groupName').exists(),grpcontroller.groupCreation);
+    --> app.post('/group/create',body('groupName').exists(),body('memberids').exists(),grpcontroller.groupCreation);
+    --> app.post('/group/create',oneOf([[check('groupName').exists(),check('memberids').exists()]]),grpcontroller.groupCreation);
+    
+   // in controller.js
+   const { validationResult } = require('express-validator');
+   const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Git concepts:
+1.If we want to clone the project --> git clone pathcopy
+2.If we want to know the git status --> git status (modified files here shown)
+3.If we want to pull the code    --> git pull
+4.If we get any merge confilcts while pull the code -->git stash
+5.After git pull we have to give --> git stash pop
+6.If we want to add single changed file --> git add filename
+7.If we want add all changed files    -->git add .
+9.If we want to know logs  -->git log 
+10.If we want to see the last commit changes --> git show  commitid  and git diff
+11.If we want to save changed code temporary in git  --> git stash 
+12.If we want to see list of stash files -->git stash list
+13.If we want to add code to git  -->git stash pop
+14.If we want to see the cofig list --> git config --list
+15.If we want to config --> git config --global user.name "Your Name"
+                        --> git config --global user.email "youremail@domain.com"
+16.If we want to create the branch --> git checkout -b "brancname"
+17.If we want to switch the branch --> git checkout branchname
+18.If we want to delete the local branch --> git branch -d branchname
+19.If we want to see the differnece b/w merge files -->git diff
+20.If we want to switch from one branch to other branch and needs to get the code into that branch from current branch ----> git fetch && git checkout group-create-api
+21.If we want to remove the changing code before push the code(undo) --> git checkout filename
+22.If we want to reset the recent commit  --> git log --oneline      --> git reset 34fdr33         // 34fdr33 --> comes from git log --oneline 
+23.If we want to generate .env file first time --> cp .env.example .env
+24.If we want to remove all added files from git --> git reset HEAD
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Angular concepts :
+
+ 1. If we want to install angular :  
+  --> npm install@angular/cli -g    
+
+ 2. If we want to run angular  at angular cli:
+  -->  ng serve     
+ 
+ 3. If we want to change the port number in angular in localhost
+  --> ng serve --port=4300
+          &&&&&&
+    If we want to kill the angular port 
+  --> sudo kill $(sudo lsof -t -i:port:4200)    //4200 means running port number
+                       (or)
+  --> sudo kill `sudo lsof -t -i:4200`        //4200 means running port number
+          &&&&&&
+    If we want to run the angular in different port
+  --> ng s --port 4300     // 4300 is the required running port number
+  
+  --> ng s --host '192.168.1.226'   // ip address 
+
+   sudo lsof -i :3000
+     this will list all PID listening on this port, once you have the PID you can terminate it with the following:
+
+   kill -9 {PID}
+
+ 4. If we dont want to run every time when updating the code in angular at that time we have to use watches :
+  --> sudo sysctl fs.inotify.max_user_watches=524288
+      sudo sysctl -p --system
+      (watches limit): echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+ 5. If we want to delete all the unwanted modules in the project
+  --> npm prune
+
+ 6. If we want to install bootstrap
+  --> npm i bootstrap --save
+    and Then we have to add stles.css
+  --> @import '~bootstrap/dist/css/bootstap.min.css';
+
+ 7. If we want to create a new project on angular
+  --> syntax: ng new requiredprojecctname
+  --> ng new customermanagementprjct
+
+ 8. Angular cli commands:
+    1. ng new projectname  --> for creating new project
+    2. ng --version         --> for knowing the angular version
+    3. ng generate   --> by using ng generate we can generate components,services,pipes,modules  
+       --> ng generate component componentname 
+       --> ng generate service servicename
+       --> ng generate module modulename
+       --> ng generate pipe pipename
+    4. ng serve --> used for compiling and run the application 
+    5. ng test  --> used for test the all component spec.ts file (unit test)
+    6. ng e2e   --> used for run the all the tests
+    7. ng build --> used for build and generate the output of application and compiled js code this is mainly used for promoting code to    high environoment it generates one dist file.
+
+    8. ng lint  --> used for code syntax linting, set rules for how code should written lint follows coding standards
+ 
+ 9. Angular modules: 
+     what is a module ? --> Modules in angular are legal functionality that means if we develop customer management under that onboarding module,          address module, beneficiary module, document module, device module like that.
+     app.module.ts
+     --> under decleration -->components
+     --> under imports  -->imported modules
+     --> under providers --> services
+     --> bootstrap tells which component load first
+
+ 10. If we generate any module we need import into app.module.ts 
+     Ex: ng generate module something
+     app.module.ts:  import { something } from './todo/todo.module'; and imports:{add here also}
+ 
+ 11. Decorators in angular:
+     -->Typescript feature used for passing meta data
+     -->Decrators are functions that will return functions
+     -->Decrators are invoked at run time
+     -->Decarators are represent with @
+     Types of Decrators in Angular:   
+      1. class Decrators: @Ngmodule, @component
+      2. property Decarator: @input, @output
+      3. method Decarator: @Hostlistned
+      4. parameters Decarator: @inject
+
+ 12. Components in angular:
+    
+ 13. Directives in angular:
+    Angular have three types of directives:
+     1. component directive
+     2. structural directive     ->ngFor, ngIf, ngSwitch
+     3. attribute directive      ->ngStyle,ngClass
+
+ 14. ngif in angular:
       
-   13.delete input.users
-
-   Flow
-    socket(packet)->controller(processor)->preprocessor(doNothing)->DynamicAlmondProperties(redisUpdate)->genericModel(get)->notification(mainFunction)->container(almondProperties),container(propertiesNotification),getAlmondName->cassandra(qtoCassHistory),addToHttpRedis(pushToRedis)->sendNotification,cassandra.qtoCassConverter,getNotificationData->scsi(sendFinal),CMS(sendFinal).
-
-   
-   <a name="1200"></a>
-## 6)DynamicDeviceAdded (Command 1200)
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   3.insert into  AlmondplusDB.DEVICE_DATA 
-   Params:AlmondMAC
-
-   4.select from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS 
-   Params:CA.CMSCode, AU.AlmondMAC
-
-   Redis
-   /*if(Object.keys(variables).length==0) */
-   2.multi.hmset on MAC, AlmondMAC,key,variable
-
-             (or)
-
-   /* if (deviceArray.length>0) */
-   2.multi.hmset on MAC:%s, AlmondMAC
- 
-   Functional
-   1.Command 1200
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(dymamicAddAllDevice)->model(device.execute),redisDeviceValue,genericModel-> scsi(sendFinal),CMS(sendFinal),updateMACS.
+    1. *ngIf
+     Ex: <div *ngIf = "showmsg">Testing Sucess</div>
+    2. *ngIf else
+     Ex: <div *ngIf = "showmsg; else elsemsg>something will be printed</div>
+         <ng-template #elsemsg>testing failed<ng-template>
+    3. ngIf with then and else statement
+     Ex: <div *ngIf ="showme; then showit; else dontshowme"></div>
+         <ng-template #showit>testing sucess</ng-template>
+         <ng-template #dontshowme>testing failed</ng-template>
 
 
-   a name="1500"></a>
-## 7)DynamicClientList(Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into  AlmondplusDB.WIFICLIENTS              /*if (!doBackUp)*/
-     Params:AlmondMAC
-
-   3.Delete from WIFICLIENTS
-     Params:AlmondMAC
-
-   4.insert into  AlmondplusDB.WIFICLIENTS
-     Params:AlmondMAC
-
-   Functional
-   1.Command 1500
-
-   Flow
-  socket(packet)->controller(processor)->preprocessor(doNothing)->genericModel(execute),genericModel(addAll),insertBackUpAndUpdate,removeAndInsert.
-
-
- a name="1500"></a>
-## 8)DynamicClientUpdated (Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into  AlmondplusDB.WIFICLIENTS
-     Params:AlmondMAC
-
-   Functional
-   1.Command 1500
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->genericModel(execute),genericModel(add).
-
-
-<a name="1500a"></a>
-## 9)DynamicClientAdded (Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQl
-   2.Insert on AlmondplusDB.WIFICLIENTS
-     params: AlmondMAC
-
-   3.Select on NotificationID
-     params: UserID
-
-   15.Update on AlmondplusDB.NotificationID
-      params:RegID
-
-   /*if (oldRegid && oldRegid.length > 0) */
-   16.Delete on AlmondplusDB.NotificationID
-      params: RegID
-
-   REDIS
-   4.hmget on AL_<AlmondMAC>                   // params: ["name"]
-   5.LPUSH on AlmondMAC_Client                 // params: redisData
-
-   /* if (res > count + 1) */
-   6.LTRIM on AlmondMAC_Client                //here count = 9, res = Result from step 5
-             
-              (or)
-
-   /* if (res == 1) */
-   6.expire on AlmondMAC_Client             //here, res = Result from step 5
-   
-   7.LPUSH on AlmondMAC_All                // params: redisData
-   /* if (res > count + 1) */
-   8.LTRIM on AlmondMAC_All                //here count = 19, res = Result from step 7
-             
-              (or)
-
-   /* if (res == 1) */
-   8.expire on AlmondMAC_All             //here, res = Result from above step 7
-
-   Postgres
-   9.Insert on recentactivity
-     params: mac, id, time, index_id, client_id, name, type, value
-
-   Cassandra
-   12.Insert on notification_store.notification_records
-      params: usr_id, noti_time, i_time, msg
-   13.Update on notification_store.badger
-      params: usr_id
-   14.Select on notification_store.badger
-      params: usr_id
-   
-   Functional
-   1.Command 1500
-   10.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow;
-     delete ans.Devices;
-     delete ans.epoch;
-   11.delete input.users;
-
-   Flow
-socket(packet)->controller(processor)->preprocessor(doNothing)->genericModel(execute)->genericModel(add)->receive(mainFunction)->notify(sendAlwaysClient)->generator(wifiNotificationGenerator)->cassandra(qtoCassHistory)->cassandra(qtoCassConverter)->msgService(notificationHandler)->msgService(handleResponse)
-
-
-<a name="1500"></a>
-## 10)DynamicAllClientsRemoved(Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Cassandra
-   2.INSERT INTO  notification_store.almondhistory
-     Params:mac,type,data,time
-
-   8.INSERT INTO notification_store.notification_records
-     Params:"usr_id", "noti_time" , "i_time" , "msg"
-   
-   9.UPDATE notification_store.badger           // SET b_cnt = b_cnt + 1
-     Params:usr_id  
-
-   10.select from notification_store.badger     // b_cnt as count,usr_id as id
-     Params:usr_id  
-
-   SQL
-   3.Delete from WIFICLIENTS
-     Params:AlmondMAC  
-   4.select from NotificationID
-     Params:UserID 
-   11.UPDATE on AlmondplusDB.NotificationID
-     Params:RegID
-   12.DELETE FROM AlmondplusDB.NotificationID
-     Params:RegID   
-
-   Redis
-   5.hmget on AL_<almondMAC>                            //     Params: ["name"]  
-                                   
-   Functional
-   1.Command 1500
-
-   6.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow;
-     delete ans.Devices;
-     delete ans.epoch;
-
-   7.delete input.users  
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->genericModel(execute)->genericModel(removeAll)->receive(mainFunction)->notify(alwaystrue)->sqlPool(getID)->generator(wifiNotificationGenerator),getAlmondName->sendNotification->cassandra(qtoCassConverter),getNotificationData,insertDynamicUpdate,loggerPoint1(execute),cassandra(getQuery),insertDynamicUpdate->msgService(notificationHandler)->msgService(qToGCMConverter),sql(updateRegID)->sql.deleteID
-
- 
-<a name="1200"></a>
-## 11)DynamicDeviceList(Command 1200)
-   Command no
-   1200- JSON format
-
-    Required
-   Command,CommandType,Payload,almondMAC
-
-    Redis
-   2.hgetall on MAC:<AlmondMAC> 
+ 15. ngFor in angular: It is similar to for loop 
+   Ex:text.ts file--> users = ["rahul","swaroop","haii","hello"];
+      text.html file--> <div *ngFor="let name of users; index as i">
+                           {{name}}
+                           </div>
      
-    multi
-   4.hmset on AL_<AlmondMAC>                    // params:["deviceRestore", "restore"]
+ 16. ngStyle in angular : 
+   syntax: <div [ngStyle]="'background-color':value">Example1</div>
+   Ex: <div [ngStyle]="{'color':'red'}">testing sucess</div>
 
-    multi
-   5.hgetall on MAC:<AlmondMAC>:deviceIds[id]
+ 17. Data binding in angular: From template to controller and controller to template vice versa.
+       Types of Data binding:
+         1.One Way Data Binding:
+             compment to view:
+           1.Interpolation
+           2.Property Binding
+           3.Style Binding
+           4.Attribute Binding
+              View to component:
+           1.Event Binding
+         2.Two way Data binding
 
-     multi 
-   9.del on MAC:<almondMAC>
-
-     multi
-   10.del on MAC:<payload AlmondMAC>:<removeIds>
-
-   /*if(Object.keys(variables).length==0)*/
-     multi
-   11.hmset on MAC:<AlmondMAC>,key,variables
-
-                (or)
-
-   /* if (deviceArray.length>0) */
-   multi
-   11.hmset on MAC:<AlmondMAC>, deviceArray
-
-    SQL
-   3.SELECT from DEVICE_DATA
-     Params:AlmondMAC
-   7.insert into  AlmondplusDB.DEVICE_DATA
-     Params:AlmondMAC
-
-   8.Insert on AlmondplusDB.DEVICE_DATA
-     params: AlmondMAC 
-
-   12.select  from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS
-   Params:CA.CMSCode, AU.AlmondMAC
-
-    Cassandra
-   6.INSERT INTO  notification_store.almondhistory
-   Params:mac,type,data,time 
-
-   Functional
-   1.Command 1200
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(dymamicAddAllDevice)->device(addAll)->redisDeviceValue(getDeviceList)->genericModel(insertBackUpAndUpdate)->device(getDevices)->genericModel(get)->redisDeviceValue(getFormatted)->genericModel(removeAndInsert)->redisDeviceValue(addAll)->receive(mainFunction)->scsi(sendFinal).
-
-
-   <a name="1200"></a>
-## 12)DynamicIndexUpdated(Command 1200)
-   Command no
-   1200- JSON format
-
-    Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   /*if(data.index == 0 && packet.cmsCode)*/
-   2.hgetall on MAC:<almondMAC>,data.deviceId
-
-   /*if(Object.keys(variables).length==0)*/
-    multi.
-   3.hmset on MAC:<AlmondMAC>,key,variables
-
-                (or)
-
-  /* if (deviceArray.length>0) */
-  multi
-  3.hmset on MAC:<AlmondMAC>, deviceArray
-
-  7.LPUSH on AlmondMAC_Device  
-     // params: redisData  
+  Ex:1  Interpolation:From component to view
+    Syntax: {{testing sucess}}
+    Ex: var name = "rahul"   Ex: var x = 100;     Ex:  var obj = {id:99,name:"gowrav"}
+        {{name}} 		 {{x}}                    {{obj.id}}
    
-   /* if (res > count + 1) */
-  8.LTRIM on AlmondMAC_Device                
-             
-              (or)
-  /* if (res == 1) */
-  8.expire on AlmondMAC_Device  
-
-  9.LPUSH on AlmondMAC_All
-
-  /* if (res > count + 1) */
-  10.LTRIM on AlmondMAC_All
-             
-              (or)
-
-  /* if (res == 1) */
-  10.expire on AlmondMAC_All  
-                                   
-
-   SQL
-  4.SELECT AlmondplusDB.NotificationPreferences
-    Params:AlmondMAC, DeviceID, UserID IN
-  5.select from NotificationID
-     Params:UserID
-  6.select from DeviceData
-     Params:AlmondMAC, DeviceID 
-
-  17.Update on AlmondplusDB.NotificationID
-      params:RegID
-
-  /*if (oldRegid && oldRegid.length > 0) */
-  18.Delete on AlmondplusDB.NotificationID
-      params: RegID
-
-  19.select from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS
-      Params:CA.CMSCode, AU.AlmondMAC   
-
-  postgres
-  11.Insert on recentactivity
-     params: mac, id, time, index_id,index_name, name, type, value
-
-  Functional
-  1.Command 1200
-
-  12.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow; 
-     delete ans.Devices;
-     delete ans.epoch;
-
-  13delete input.users  
-
-  cassandra
-  14.INSERT INTO notification_store.notification_records
-     params:"usr_id", "noti_time" , "i_time" , "msg"
-
-  15.Update on notification_store.badger
-      params: usr_id
-  16.Select on notification_store.badger
-      params: usr_id
-
-   Flow
-socket(packet)->controller(processor)->preprocessor(dynamicIndexUpdated)->device(updateIndex)->DeviceStore(update)->updateDeviceIndex->rec(mainFunction)->container(dynamicIndexUpdate)->sql(preferenceCheck)->sql(getID)->container(generator.deviceIndexUpdat)->sql(queryDeviceData)->cassandra(qtoCassHistory),addToHttpRedis,pushToRedis->cassandra(qtoCassConverter)->getNotificationData->insertNotification->insertDynamicUpdate->cassandra(getQuery)->scsi(sendFinal)
-
-
-
-  <a name="1500"></a>
-## 13)DynamicClientRemoved(Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.select from WifiClients
-     Params:AlmondMAC, ClientID
-
-   3.Delete from WIFICLIENTS
-     Params:AlmondMAC
-
-   4.select from NotificationID 
-     Params:UserID  
-
-  16.UPDATE on AlmondplusDB.NotificationID
-     Params:RegID 
-
-  /*if (oldRegid && oldRegid.length > 0)*/
-  17.DELETE FROM AlmondplusDB.NotificationID
-     Params:RegID IN 
-
-    Redis
-   5.hmget on AL_<almondMAC>
-     // params:"name"
-
-   6.LPUSH on AlmondMAC_Clients  
-      // params: redisData 
-
-    /* if (res > count + 1) */
-   7.LTRIM on AlmondMAC_Clients               
-             
-              (or)
-
-   /* if (res == 1) */
-   7.expire on AlmondMAC_Clients    
-
-   8.LPUSH on AlmondMAC_All
-
-   /* if (res > count + 1) */
-   9.LTRIM on AlmondMAC_All
-             
-              (or)
-
-   /* if (res == 1) */
-   9.expire on AlmondMAC_All   
-
-   Postgres
-
-  10.INSERT INTO recentactivity
-     Params:mac, id, time, index_id, client_id, name, type, value  
-
-    Cassandra
-  13.INSERT INTO notification_store.notification_records 
-     Params:"usr_id", "noti_time" , "i_time" , "msg" 
-  
-  14.UPDATE notification_store.badger
-     Params:usr_id
-
-  15.select from  notification_store.badger
-     Params:usr_id   
-
-  Functional
-  1.Command 1200
-
-  11.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow;
-     delete ans.Devices;
-     delete ans.epoch;
-
-  12.delete input.users  
+                
+ 18. property binding:
+     Ex: <div [ngStyle]="{color:fromts}">This is property binding</div>
  
-    Flow
-socket(packet)->controller(processor)->preprocessor(dynamicClientRemoved)2.CP(query)->genericModel(execute)3.genericModel(remove)->container(sendAlwaysClient)->4.sql.getID-> generate(wifiNotificationGenerator)->5.getAlmondName->cassandra(qtoCassHistory)->getInsertData->addToHttpRedis->6,7.pushToRedis->8,9.pushToRedis->10.postgres(query)->cassandra(qtoCassConverter)->11.getNotificationData->12.insertNotification->13.insertDynamicUpdate-> 14.insertDynamicUpdate->15insertDynamicUpdate->msgService(notificationHandler)->msgService(qToGCMConverter)->msgService(handleResponse)->16.sql(updateRegID)->17.sql(deleteID).
+ 19. Attribute binding:
 
+ 20: Event binding: Event binding is a techinique that allows the user to bind events from view/template  to component.
+     syntax : <button (event_name) = "function()">submit</button>   // event_name =click or mouseover
+     Ex: component.html ---> <button (click) = "clickme()">click</button>
+         component.ts   ---> clickme(){
+                             alert("This is for just testing purpose");
+                               }
+     Ex:  <input (focus) = "clickme()" />               // have to know events in html or js
 
- <a name="1200"></a>
-## 14)DynamicDeviceRemoved(Command 1200)
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   multi
-   2.hdel on MAC:<AlmondMAC>, deviceId
-
-   multi
-   3.del on MAC:<AlmondMAC>, deviceId
-
-   SQL
-   4.Delete from DEVICE_DATA
-     Params:AlmondMAC
-
-   5.select from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS
-     Params:CA.CMSCode=CMS.CMSCode and AU.AlmondMAC = CA.AlmondMAC
-
-   Functional
-   1.Command 1200
-
-   Flow
-socket(packet)->controller(processor)->preprocessor(doNothing)->model(device.execute)->redisDeviceValue(remove)->genericModel(remove)->CMS(sendFinal).
-
-
-   <a name="49"></a>
-## 15)DynamicAlmondNameChange(Command 49)
-   Command no
-   49- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.redisUpdate
-   // params:data, data.AlmondMAC
-
-   Functional
-   1.Command 49
-   
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->ALC(almond_name_change).
-
-
-   <a name="153"></a>
-## 16)DynamicAlmondModeChange(Command 153)
-   Command no
-   153- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.redisUpdate
-       // params:data, data.AlmondMAC
-
-
-  Functional
-  1.Command 153
-
-   Flow
-  socket(packet)->controller(processor)->preprocessor(doNothing)->ALC(changeMode).
-
-
-
-   <a name="1200"></a>
-## 17)DynamicAllDevicesRemoved(Command 1200)
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on MAC:<AlmondMAC>
-
-   multi
-   3.del on MAC:<almondMAC>:removeIds
-
-   multi 
-   4.del on  MAC:<AlmondMAC>:deviceIds
-
-   5.hdel on AL_<AlmondMAC>
-    //Params:deviceRestore
-
-   9.hmget on AL_<AlmondMAC>
-    //Params: name
-
-   10. LPUSH on AlmondMAC_Device  
-    // params: redisData  
-   
-   /* if (res > count + 1) */
-  11.LTRIM on AlmondMAC_Device                
-             
-              (or)
-
-  /* if (res == 1) */
-  11.expire on AlmondMAC_Device 
-
-  12.LPUSH on AlmondMAC_All
-  
-  /* if (res > count + 1) */
-  13.LTRIM on AlmondMAC_All
-             
-              (or)
-
-  /* if (res == 1) */
-  13.expire on AlmondMAC_All   
-
-
-  SQL 
-  7.Delete from DEVICE_DATA
-   //Params:AlmondMA
-
-  8.select from NotificationID 
-   Params:UserID 
-
-  20.UPDATE on AlmondplusDB.NotificationID
-    Params:RegID 
-
-  /*if (oldRegid && oldRegid.length > 0)*/
-   21.DELETE FROM AlmondplusDB.NotificationID
-     Params:RegID IN  
-
-   22.select from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS
-    Params:CA.CMSCode=CMS.CMSCode and AU.AlmondMAC = CA.AlmondMAC 
-
-   Postgres
-   14.INSERT INTO recentactivity  
-    Params:mac, id, time, index_id,index_name, name, type, value
-
-   Cassandra
-   6.INSERT INTO  notification_store.almondhistory 
-     Params:mac,type,data,time
-  
-   17.INSERT INTO notification_store.notification_records
-     Params:"usr_id", "noti_time" , "i_time" , "msg"
-
-   18.UPDATE notification_store.badger
-      Params:usr_id
-
-   19.select from  notification_store.badger
-      Params:usr_id    
-
-   Functional
-   1.Command 1200
-
-  15.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.Devices;
-     delete ans.epoch;
-
-   16.delete input.users 
+ 21. Two way data binding: Two way data binding is a data binding from view to component and vice versa.
+                           we achieve two data binding using [(ngModel)]
+      syntax : <input[(ngModel)]='data' />
  
-   Flow socket(packet)->controller(processor)->preprocessor(doNothing)->model(device.execute)->DeviceStore(removeAll)->DeviceStore(getDeviceList)->removeAllDevices->genericModel(removeAll)->loggerPoint1(execute)->rec(mainFunction)->container.(alwaystrue)->sqlPool(getID)->container.( generator.allDevicesRemoved)->generate(allDevicesRemoved)->getAlmondName->cassandra(qtoCassHistory)-> getInsertData->addToHttpRedis->pushToRedis->Postgres->sendNotification->getNotificationData-> cassandra(getQuery)-> msgService(notificationHandler)->msgService(qToGCMConverter)->sql(updateRegID)->sql(deleteID)->scsi(sendFinal).
+ 22. Angular pipes | : Pipes will take data input and convert/transform into a desired format.
+         Types of pipes: 1. Built in pipes
+              		 2. parameterised pipes
+     			 3. chining pipies
+ 			 4. custom pipes
 
+   1. Built in pipes:   Lowercase, Uppercase, percent, currency, Date, json     
+            Ex: {{obj.salary | currency:'INR'}}
+   
+   2. parameterised pipes : whichever pipes can pass parameters those pipes are parameterised pipes and we can pass one or more                parameters to pipes.
+   3. Custom pipes: we can generate the new custom pipe using angular cli : ng generate pipe pipename   // still have some doubts
+    
+ 23. Routing in angular : 
+    1.Routing is a mechanism used by angular frameworks to manage the "paths" and  "routes" of our angular application.
+    2.All the routes/paths or navigation requirements in  angular are written by angular router package.
+    3.We can navigate from one component view to other using anular routes
+    
+  1.Angular Routing strategy:
+   path location stratgy and hash location stratgy
+   --> By default angular application uses path location stratgy.
+   Ex: appmodule.ts      inside providers
+    {provide:locationstrategy, useClass: hastlocationStrategy};  then it will automatically import the module in the imports
+    
+  2.Base href : The base href is present in index.html file for all angular applications.  <base href  = "/">
+    Ex : ng build --base-href = "/demo"
 
+  3.Routing module: we can generate the app routing module using CLI : ng generate module app-routing --fiat-module=app
 
-   <a name="1500"></a>
-## 18)DynamicClientJoined(Command 1500)
-   Command no
-   1500- JSON format
+  4.Parameterized Routes : we can pass the value as a dynamic 
+    {path : 'product/:id', component:componentName}
 
-   Required
-   Command,CommandType,Payload,almondMAC
+ 24. Angular child routes:
+     1.we can configure any no of routes to parrent route.
+     Ex:  children: [{path:  'main',component:  MainComponent,data: { title: 'chatactive'}},
+                       { path: 'sidenav', component:SidenavComponent},
 
-   SQL
-   2.insert into  AlmondplusDB.WIFICLIENTS
-    Params:AlmondMAC
-
-   3.Select on AlmondplusDB.WifiClientsNotificationPreferences
-    params: AlmondMAC,ClientID,UserID
-
-   4.select from NotificationID 
-   Params:UserID  
-
-   16.UPDATE on AlmondplusDB.NotificationID
-   Params:RegID
-
-    /*if (oldRegid && oldRegid.length > 0)*/
-   17.DELETE FROM AlmondplusDB.NotificationID
-    Params:RegID IN  
-
-   Redis
-   5.hmget on AL_<almondMAC>
-   // Params:name
-
-   6.LPUSH on AlmondMAC_Client
-     params:redisData 
-
-    /* if (res > count + 1) */
-   7.LTRIM on AlmondMAC_Client               
-             
-              (or)
-
-   /* if (res == 1) */
-   7.expire on AlmondMAC_Client 
-
-   8.LPUSH on AlmondMAC_All
-
-   /* if (res > count + 1) */
-   9.LTRIM on AlmondMAC_All
-             
-              (or)
-
-   /* if (res == 1) */
-   9.expire on AlmondMAC_All   
-
-    postgres
-   10.INSERT INTO recentactivity 
-    Params:mac, id, time, index_id, client_id, name, type, value 
-
-    Cassandra
-   13.INSERT INTO notification_store.notification_records
-    Params:"usr_id", "noti_time" , "i_time" , "msg"  
-
-   14.UPDATE notification_store.badger
-     Params:usr_id
-
-   15.select from  notification_store.badger
-     Params:usr_id  
+ 25. Angular Lazy loading : 
+     1. Every large application is made up of multiple modules (modules like : messages, notification, friendslist, navbar).
+     2. All modules will loaded irrespective of the needed at that time application performance reduced.
+     3. Lazy loading helps keep intial bundle size smaller, which in turn helps decrease load times.
+  How do we use lazy loading in our application ?
+   --> CLI : ng generate module modulename --route modulename --module app.module
  
-   Functional
-    1.Command 1500
-
-   11.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow;
-     delete ans.Devices;
-     delete ans.epoch;
-
-   12.delete input.users  
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(add)->insertUpdate->rec(mainFunction)->container(checkClientPreference)-> sqlPool(preferenceCheck)->sql(getID)->container(generator.wifiNotificationGenerator)->getAlmondName->cassandra(qtoCassHistory)->addToHttpRedis->cassandra(qtoCassConverter)->getNotificationData->insertNotification->cassandra(getQuery)-> msgService(notificationHandler)->msgService(handleResponse)->sql(updateRegID)->sql.deleteID.
-
-
-
-   <a name="1500"></a>
-## 19)DynamicClientLeft(Command 1500)
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into  AlmondplusDB .WIFICLIENTS
-    Params:AlmondMAC
-
-   3.Select on AlmondplusDB.WifiClientsNotificationPreferences
-      params: AlmondMAC,ClientID,UserID
-
-   4.select from NotificationID 
-    Params:UserID 
-
-
-   16.UPDATE on AlmondplusDB.NotificationID
-   Params:RegID
-
-    /*if (oldRegid && oldRegid.length > 0)*/
-   17.DELETE FROM AlmondplusDB.NotificationID
-     Params:RegID IN  
-
-    Redis
-   5.hmget on AL_<almondMAC>
-    //Params:name 
-
-   6.LPUSH on AlmondMAC_Client
-     params:redisData 
-
-    /* if (res > count + 1) */
-   7.LTRIM on AlmondMAC_Client               
-             
-           (or)
-
-    /* if (res == 1) */
-   7.expire on AlmondMAC_Client 
-
-   8.LPUSH on AlmondMAC_All
-
-    /* if (res > count + 1) */
-   9.LTRIM on AlmondMAC_All
-             
-           (or)
-
-    /* if (res == 1) */
-   9.expire on AlmondMAC_All 
-
-    postgres
-   10.INSERT INTO recentactivity 
-    Params:mac, id, time, index_id, client_id, name, type, value 
-
-    Cassandra
-   13.INSERT INTO notification_store.notification_records
-    Params:"usr_id", "noti_time" , "i_time" , "msg"  
-
-   14.UPDATE notification_store.badger
-    Params:usr_id
-
-   15.select from  notification_store.badger
-    Params:usr_id  
-   
-   Functional
-    1.Command 1500
-
-   11.delete ans.AlmondMAC;
-     delete ans.CommandType;
-     delete ans.Action;
-     delete ans.HashNow;
-     delete ans.Devices;
-     delete ans.epoch;
-
-   12.delete input.users
-   
-   Flow
-socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(add)->insertUpdate->rec(mainFunction)->container(checkClientPreference)->sqlPool(preferenceCheck)->sql(getID)->container(generator.wifiNotificationGenerator)->getAlmondName->cassandra(qtoCassHistory)->postgres(query)->sendNotification->cassandra(qtoCassConverter)->getNotificationData->insertNotification->cassandra(getQuery)->msgService(notificationHandler)->msgService(qToGCMConverter)->sql(updateRegID)->sql.deleteID.
-
-
-   <a name="1400"></a>
-## 20)DynamicRuleAdded(Command 1400)
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into  AlmondplusDB.RULE
-    Params:AlmondMAC
-
-   Functional
-    1.Command 1400
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(add)->insertUpdate.
-
-
-    <a name="1400"></a>
-## 21)DynamicRuleUpdated(Command 1400)
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-    2.insert into  AlmondplusDB.RULE
-    Params:AlmondMAC
-
-   Functional
-    1.Command 1400
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(add)->insertUpdate.
-
-
-   <a name="1400"></a>
-## 22)DynamicRuleRemoved(Command 1400)
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Delete from RULE
-   Params:AlmondMAC
-
-   Functional
-    1.Command 1400
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(remove)
-
-
-   <a name="1400"></a>
-## 23)DynamicAllRulesRemoved(Command 1400)
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Cassandra
-   2.INSERT INTO  notification_store.almondhistory
-   Params:mac,type,data,time
-
-   SQL
-   3.Delete from RULE
-   Params:AlmondMAC
-
-   Functional
-    1.Command 1400
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)-> genericModel(removeAll).
-
-
-   <a name="1200"></a>
-## 24)DynamicDeviceUpdated(Command 1200)
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-    multi
-    2.hmset on MAC:<AlmondMAC> key, variables
-
-              (or)
-
-   /*if (deviceArray.length>0)*/
-    multi
-   2.hmset on MAC:<AlmondMAC> deviceArray
-
-   SQL
-   3.insert into  AlmondplusDB.DEVICE_DATA
-    Params:AlmondMAC 
-   4.select from SCSIDB.CMSAffiliations CA,AlmondplusDB.AlmondUsers AU,SCSIDB.CMS CMS 
-    Params:CA.CMSCode=CMS.CMSCode and AU.AlmondMAC = CA.AlmondMAC 
-
-   Functional
-    1.Command 1200
-
-   Flow
-socket(packet)->controller(processor)->preprocessor(dynamicDeviceUpdated)->model(device.execute)->DeviceStore(update)->genericModel(add)->scsi(sendFinal)->CMS(sendFinal).
-
-
-
-   <a name="1300"></a>
-## 25)DynamicAllSceneRemoved(Command 1300)
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Delete from SCENE
-    Params:AlmondMAC
-
-   Functional
-    1.Command 1300
-
-   Flow
-   socket(packet)->controller(processor)->preprocessor(doNothing)->model(genericModel.execute)->genericModel(remov
-   
-MOBILE SERVER   
-   ## 1)Command 1061-ActivateScene
-   ## 2)Command 1100-RouterSummary
-   ## 3)Command 1500-ClientList
-   ## 4)Command 1700-GetClientPreferences
-   ## 5)Command 1700-UpdateClientPreference
-   ## 6)Command 1700-GetDevicePreferences
-   ## 7)Command 1700-UpdateDevicePreference
-   ## 8)Command 23-AffiliationUserRequest
-   ## 9)Command 1900-Logout
-   ## 10)Command 1800-UpdateNotificationRegistration
-   ## 11)Command 1112-GetAlmondList
-   ## 12)Command 1003-Login
-   ## 13)Command 1023-AffiliationUserRequest
-   ## 14)Command 1011-SubscribeMe
-   ## 15)Command 1011-PaymentDetails
-   ## 16)Command 1011-UpdateCard
-   ## 17)Command 1011-DeleteSubscription
-   ## 18)Command 1013-IOTScanResults
-   ## 19)Command 61-AlmondNameChange
-   ## 20)Command 1060-ChangeUser(action:add)
-   ## 21)Command 1110-UpdateUserProfileRequest
-   ## 22)Command 1110-DeleteAccountRequest
-   ## 23)Command 1060-ChangeUser(action:update)
-   ## 24)Command 1110-ChangePasswordRequest
-   ## 25)Command 1110-DeleteMeAsSecondaryUserRequest 
-   ## 26)Command 1110-DeleteSecondaryUserRequest
-   ## 27)Command 1110-UserInviteRequest
-   ## 28)Command 1110-UnlinkAlmondRequest
-   ## 29)Command 1110-UserProfileRequest
-   ## 30)Command 300-NotificationPreferences
-   ## 31)Command 283-NotificationDeleteRegistrationRequest
-   ## 32)Command 281-NotificationAddRegistration
-   ## 33)Command 151-AlmondModeRequest
-   ## 34)Command 113-NotificationPreferenceListRequest
-   ## 35)Command 102-CloudSanity
-   ## 36)Command 6-Signup
-   ## 37)Command 3-Logout
-   ## 38)Command 4-logoutall
-   ## 39)Command 2222-Restore
-   ## 40)Command 1525-UpdateClientPreferences
-   ## 41)Command 1526-GetClientPreferences
-   ## 42)Command 1400-RuleList
-   ## 43)Command 1200-DeviceList
-   ## 44)Command 1300-SceneList
-   ## 45)Command 1-res
-   ## 46)Command 806
-   ## 47)Command 804a-for device
-   ## 48)Command 804-for client
-   ## 49)Command 1004-Super_Login 
-   ## 50.Command 800
-   ## 51)Command 1050-AlmondPropertiesResponse
-   ## 52)Command 1011-CheckSubscriptionStatus
-
-
-   
-<a name="1061"></a>
-command type:ActivateScene
-## 1)Command 1061
-   Command no
-   1061- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on AL_<AlmondMAC>
-
-   3.get on ICID_<string>    // here <string> = random string data)
-
-   4.Code on ICID:<Timeout>:config.SERVER_NAME   
-
-   Functional
-   1.Command 1061
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)-> commandMapping(almond.onlyUnicast)->almond(onlyUnicast)->RM(getAlmond)->RM(redisExecute)->redisClient(query)->RM(setAndExpire)-> redisClient(setex).
-
-
-   <a name="1100"></a>
-command type:RouterSummary
-## 2)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   3.hgetall on AL_<AlmondMAC>
-
-   4.get on ICID_<string>    // here <string> = random string data)
-
-   5.setex on ICID_<string>            // (prefix + key), value = SERVER_NAME
-
-   QUEUE -
-   7.Send response to config.SERVER_NAME    // (payload,command,almondMAC) to QUEUE
-
-   Functional
-   1.Command 1100
-
-   2.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   6.delete store[commandID]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(almond.onlyUnicast)->redisClient(query)
-
-
-   <a name="1500"></a>
-command type:ClientList
-## 3)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT from WIFICLIENTS
-   Params:AlmondMAC
-
-   Functional
-   1.Command 1500
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping.model->genericModel(execute)->genericModel(get)->genericModel(hash).
-
-
-   <a name="1700a"></a>
-command type:GetClientPreferences
-## 4)Command 1700
-   Command no
-   1700- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   /*if (data.Action == "get")*/
-   2.Select From  ClientPreferences
-   Params: AlmondMAC,  UserID
-
-   Functional
-   1.Command 1700
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping.model->preferences(do)->genericModel(select).
-
-
- <a name="1700b"></a>
-command type:UpdateClientPreference
-## 5)Command 1700
-   Command no
-   1700- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into ClientPreferences
-   Params: AlmondMAC, UserID
-
-   Functional
-   1.Command 1700
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(model)->preferences(do)->genericModel(insertOrUpdate)
-
-
- <a name="1700c"></a>
-command type:GetDevicePreferences
-## 6)Command 1700
-   Command no
-   1700- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   /*if (data.Action == "get")*/
-   2.Select From  NotificationPreferences
-   Params:AlmondMAC, UserID
-
-   Functional
-   1.Command 1700
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(model)->preferences(do)->genericModel(select)->
-
-
- <a name="1700d"></a>
-command type:UpdateDevicePreference
-## 7)Command 1700
-   Command no
-   1700- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into NotificationPreferences
-   Params:AlmondMAC,UserID
-
-   Functional
-   1.Command 1700
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(model)->preferences(do)-> genericModel(insertOrUpdate)->
-
-
-    <a name="23"></a>
-command type:AffiliationUserRequest
-## 8)Command 23
-   Command no
-   23- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on CODE:<data.code>
-
-   4.get on ICID_<code>                           // here code:some random string
-
-   5.setex on ICID_<code>                         // here code:some random string
-
-   SQL
-   3.Select from Users
-   Params:UserID
-
-   Queue
-   8.Send AffiliationUserRequestResponse to rows.server
-
-   Functional
-   1.Command 23
-
-   6.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   7.delete store[row.CommandID]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(model)->(affiliation.execute)->RM(getCode)->redisClient(query)->SM(getEmail)->CB(incCommandID)->generator(getCode)->RM(redisExecute)-> RM(setAndExpire)->redisClient(setex)->RM(setCode)->setAndExpire->redisClient(setex)->dispatcher(unicast)->broadcaster(unicast)->RM(getAlmond)->redisClient(query).
-
-
-   <a name="1900"></a>
-command type:Logout
-## 9)Command 1900
-   Command no
-   1900- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.DELETE FROM UserTempPasswords
-   Params:UserID,TempPassword
-   
-   6.Delete From NOTIFICATIONID
-   Params: parsedPayload
-
-   Redis                                            
-   4.hmset on UID_<socket.userid> // values = Q_config.SERVER_NAME,userSession.length 
-
-   Functional
-   1.Command 1900
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   /*if (userSession.length == 1)*/
-   5.delete socketStore[userid]
-
-   7.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(model)->L(logout)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile)->dispatcher(socketHandler)->MS(remove)->RM(redisExecute)->secondaryModel(model)->notification(do)->genericModel(delete)->dispatcher(dispatchResponse).
-
-
-    <a name="1800"></a>
-command type:UpdateNotificationRegistration
-## 10)Command 1800
-   Command no
-   1800- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.insert into NOTIFICATIONID
-   Params:parsedPayload
-
-   Functional
-   1.Command 1800
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(notification.do)->genericModel(insertOrUpdate)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1112"></a>
-command type:GetAlmondList
-## 11)Command 1112
-   Command no
-  1112- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on UID:<UserID>
-
-   3.hgetall on AL_<pMACs.concat(sMACs)>                       // MACs=pMACs.concat(sMACs)
-
-   SQL
-   4.select from SCSIDB.CMS
-   Params:CMSCode
-
-   6.SELECT from Users
-   Params:UserID 
-
-   Functional
-   1.Command 1112
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   7.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(almond.create_almond_list)->RM(getAllAlmonds)->getAlmondDetails->RM(redisExecuteAll)->getCMSPlans->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile)->secondaryModel(almond.AlmondAffiliationData)->SM(getEmailIDUserID)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile).
-
-
-<a name="1003"></a>
-command type:Login
-## 12)Command  1003
-   Command no
-  1003- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Cassandra
-   2.Insert on logging.error_log
-     params: date,time,ip,server,category,error
-   
-   SQL
-   3.SELECT from Users
-   Params:EmailID
-
-   4.INSERT INTO UserTempPasswords
-   Params:UserID,TempPassword,LastUsedTime
-
-   8.SELECT FROM Subscriptions 
-   Params:AlmondMAC
-
-   Redis
-   5.hgetall on UID_<data.UserID> 
-
-   7.hincrby on UID_<data.UserID>         //values = (Q_<config.SERVER_NAME>,1)
-
-   Functional
-   1.Command 1003
-
-   6.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   9.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(L.Mob_Login)->L(manualLogin)->L(Mob_Add_TempPass)->L(SetMACsToUserRedis)->RM(getAllAlmonds)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile)->dispatcher(socketHandler)->MS(add)->RM(redisExecute)->commandMapping(secondaryModels)secondaryModel(L.GetSubscriptions)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile).
-
-
-<a name="1023"></a>
-command type:AffiliationUserRequest
-## 13)Command  1023
-   Command no
-  1023- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on CODE:<data.Code>
-
-   4.get on ICID_<code>                                     // here code:some random string
+ 26. Anugular Route Guards : 
+     1.Route guards is used to restrict accesing routes/paths by users.
+     2.Whenever implement a route guard it will give boolean value.
+     3.Generate a route guard through CLI : ng g guard guardname
+     4.After generating the route guard we have to add into  app-routingmodule.ts file
+               Ex: {path:'admin', component:admincomponent, [canActivate:guardname]   
+
+ 27. Angular forms:Two types of forms in  angular
+                    1.Template driven form
+                    2.Reactive forms/dynamic forms
+    1. Template driven form:  we have to import the formsmodule for build the template driven module.  
+        Ex: import { FormsModule } from '@angular/forms'
+         <form #formname = "ngForm">
+
+
+ //.If we want to run the angular project in ip address
+    step1: First change the frontendconfigfile from localhost to ip address 
+    step2: In the terminal --> ng serve --host ipadress
+
+
+
+ 28. If we want to disable the any button based on condition
+     Ex: [disabled]="ToastrServiceshow"   //  ToastrServiceshow --> is the variable
+
+ 29. if we want to clear the local storage session  
+     Ex : localStorage.clear();
+
+ 30. If we want to restrict white space when entering the password in angular 
+     Ex : (keydown.space)="$event.preventDefault()"
+
+ 31. If we want to show the pop up Notification we can use this module 
+     Ex: import { ToastrService } from 'ngx-toastr';
+          --->  this.toastr.sucess('Please attach Webcam');
+          --->  this.toastr.warning('Please attach Webcam');
+      
+ 32. If we want to reset the angular template or driven forms 
+     Ex: this.formname.reset()   
  
-   5.setex on ICID_<string>            // (prefix + key), value = SERVER_NAME
-
-   7.setex on CODE:<data.code>     
-     //(prefix+key),values =res.mac,SERVER_NAME, socket.userid,commandID,res.emailID
-
-   SQL
-   3.Select from Users
-   Params:UserID
-
-   6.Select from SCSIDB.CMSAffiliations
-   Params:AlmondMAC
-
-   Queue
-   10.Send AffiliationUserRequest to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1023
-
-   8.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   9.delete store[id]
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(affiliation.execute)->affiliation_getCode->2.RM(getCode)->get_emailid->3.SM(getEmail)->CB(incCommandID)->generator(getCode)->4.RM(redisExecute)->RM(setAndExpire)->5.redisClient(setex)->6.SM(getCMSCode)->RM(setCode)->7.redisClient(setex)->dispatcher(dispatchResponse)->8.socketStore(writeToMobile)->dispatcher(socketHandler)->MS(setUnicastID)->9.requestQueue(set).
-
-
-<a name="1011a"></a>
-command type:SubscribeMe
-## 14)Command 1011
-   Command no
-  1011- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on UID_:<UserID>
-
-   Queue
-   4.Send SubscribeMeResponse to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1011
-
-   3.delete store[id] 
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(SC.subscriptionCommands)->RM(getAlmonds)->requestQueue(set)->AQP(sendToQueue)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-<a name="1011b"></a>
-command type:PaymentDetails
-## 15)Command 1011
-   Command no
-  1011- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on UID_:<UserID>
-
-   Queue
-   4.Send PaymentDetailsResponse to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1011
-
-   3.delete store[id]
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   FLOW
-   socket(packet)->validator(do)->processor(do)->commandMapping(SC.subscriptionCommands)->RM(getAlmonds)->requestQueue(set)->AQP(sendToQueue)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-<a name="1011c"></a>
-command type:UpdateCard
-## 16)Command 1011
-   Command no
-  1011- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on UID_:<UserID>
-
-   Queue
-   4.Send UpdateCardResponse to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1011
-
-   3.delete store[id]
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(packet)->validator(do)->processor(do)->commandMapping(SC.subscriptionCommands)->RM(getAlmonds)->requestQueue(set)->AQP(sendToQueue)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-<a name="1011d"></a>
-command type:DeleteSubscription
-## 17)Command 1011
-   Command no
-  1011- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on UID_:<UserID>
-
-   Queue
-   4.Send DeleteSubscriptionResponse to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1011
-
-   3.delete store[id]
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(packet)->validator(do)->processor(do)->commandMapping(SC.subscriptionCommands)->RM(getAlmonds)->requestQueue(set)->AQP(sendToQueue)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-<a name="1013"></a>
-command type:IOTScanResults
-## 18)Command 1013
-   Command no
-  1013- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM IOT_Scanner
-   Params:mac
-
-   Functional
-   1.Command 1013
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(packet)->validator(do)->processor(do)->commandMapping(almond.IOTScan)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="61"></a>
-command type:AlmondModeChange
-## 19)Command 61
-   Command no
-   61- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   3.hgetall on AL_<AlmondMAC>
-
-   4.get on ICID_<string>    // here <string> = random string data)
-
-   5.setex on ICID:<Timeout>:config.SERVER_NAME   
-
-   Queue
-   7.Send response to config.SERVER_NAME       // (payload,command,almondMAC) to QUEUE
-
-   Functional
-   1.Command 61
-
-   2.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   6.delete store[commandID]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(almond.onlyUnicast)->almond(onlyUnicast)->RM(getAlmond)->RM(redisExecute)->redisClient(query)->RM(setAndExpire)-> redisClient(setex)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-
-   <a name="1060a"></a>
-command type:ChangeUser(action:add)
-## 20)Command 1060
-   Command no
-   1060- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.UPDATE on AlmondplusDB.WifiClients
-   Params:NewName, payload.AlmondMAC, clientId
-
-   Redis
-   3.hgetall on AL_:<AlmondMAC>
-
-   multi
-   5.hgetall on UID_<userID>          //here, multi is done on every userID in UserList
-
-   Queue
-   6.Send ChangeUserResponse to MobileQueue
-
-   Functional
-   1.Command 1060
-
-   4.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(clients.update)->RM(getUsers)->redisClient(query)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->redisClient(query)->AQP(sendToQueue).
-
-
-    <a name="1110a"></a>
-command type:UpdateUserProfileRequest
-## 21)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.UPDATE on Users
-     params: UserID
-
-   Redis
-   4.hgetall on UID_<userID>          //here, multi is done on every userID in UserList
-
-   Queue
-   5.Send UserProfileResponse to MobileQueue
-
-   Functional
-   1.Command 1110
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.UpdateUserProfile)->CP(queryFunction)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->redisClient(query)->dispatchToQueues->AQP(sendToQueue).
-
-
-
-   <a name="1110b"></a>
-command type:DeleteAccountRequest
-## 22)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Select on Users
-     params:EmailID
-   3.Delete on Users
-     params: UserID
-   9.Delete on AlmondUsers
-     params: AlmondMAC
-   10.Update on AllAlmondPlus
-     params: AlmondMAC
-
-   Redis
-   4.hgetall on UID_<packet.userid>
-   5.del on UID_<packet.userid>
-
-   multi
-   6.hgetall on AL_<pMACs>
-
-   multi
-   7.del on AL_<pMACs>
-
-   multi
-   8.hdel on UID_<Entry[1]>           //values = SMAC_<AlmondMAC>, Entry[1] =Secondary UserID
-
-   13.hmset on UID_<data.userid>   //values = (Q_<config.SERVER_NAME>,0)
-
-   multi
-   14.hgetall on UID_<userID>          //here multi is done on every userID in userList
-
-   Queue
-   15.Send DeleteAccountRequestResponse to MobileQueue
-   16.Send DeleteAccountResponse to config.HTTP_SERVER_NAME
-
-   Functional
-   1.Command 1110
-   11.Send listResponse,commandLengthType ToMobile       //where listResponse = payload
-   12.delete socketStore[data.userid]
-
-   Flow
-   socket(packet)->validator(do)->validator(checkCredentials)->processor(do)->account-manager-json(DeleteAccount)->sqlManager(deleteUser)->redisManager(redisExecute),redisManager(deleteAccount)->rowBuilder(defaultReply)->dispatcher(dispatchResponse)->mongo-store(removeAll)->dispatcher(broadcast)->broadcastBuilder(removeAll)->broadcaster(broadcast)->dispatcher(broadcastToAllAlmonds)->broadcaster(broadcastModel)
-
-
-  <a name="1060b"></a>
-command type:ChangeUser(action:update)
-## 23)Command 1060
-   Command no
-   1060- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.UPDATE ON AlmondplusDB.WifiClients
-   Params:Name
-
-   3.UPDATE ON AlmondplusDB.WifiClients
-   Params:NewName, payload.AlmondMAC, clientId
-
-   Redis
-   4.hgetall on AL_:<AlmondMAC>
-
-   6.hgetall on UID_<userID>          //here, multi is done on every userID in UserList
-
-   Queue
-   7.Send ChangeUserResponse to MobileQueue
-
-   Functional
-   1.Command 1060
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(clients.update)->RM(getUsers)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-  <a name="1110c"></a>
-command type:ChangePasswordRequest
-## 24)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Select on Users
-   params:EmailID
-
-   3.UPDATE on Users
-   Params:Password,EmailID
-
-   4.DELETE FROM UserTempPasswords              //if (rows.affectedRows == 1)
-   Params:UserID
-
-              (or)
-
-   4.return                  //if (rows.affectedRows == 0)        
-
-   5.DELETE FROM NotificationID
-   Params:UserID
-
-   Redis
-   7.hmset on UID_<socket.userid>      // values = Q_config.SERVER_NAME,userSession.length 
-
-   multi
-   9.hgetall on UID_<userID>          //here multi is done on every userID in userList
-
-
-   Queue
-   10.Send ChangePasswordResponse to MobileQueue
-
-   Functional
-   1.Command 1110
-
-   6.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   8.delete store[id]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.ChangePassword)->AM_J(saltAndHash)->removeAllTempPass->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(socketHandler)->broadcaster(broadcast)->MS(getSockets)->requestQueue(del)->MS(sendRequest)->sendToRemoteUsers->RM(redisExecute)->dispatcher(broadcast)->broadcaster(broadcast)->sendToRemoteUsers-> RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-<a name="1110d"></a>
-command type:DeleteMeAsSecondaryUserRequest
-## 25)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hgetall on AL_:<AlmondMAC>
-
-   5.hdel on AL_:<AlmondMAC>      // value:SUSER_secondaryUser
-
-   6.hdel on UID_:<secondaryUser>  // value:SMAC_AlmondMAC
-
-   8.hgetall on AL_:<AlmondMAC>
-
-   9.get on ICID_<string>              // here <string> = random string data
-
-   10.setex on ICID_<string>,TIMEOUT,config.SERVER_NAME    // here <string> = random string data
-
-   multi
-   14.hgetall on UID_<userID>
-
-   SQL
-   3.DELETE FROM AlmondSecondaryUsers
-   Params:AlmondMAC,userID
-
-   4.DELETE FROM NotificationPreferences
-   Params:AlmondMAC,userID
+ 33. If we want to put the time in angular
+     Ex: [ngxTimepicker]="default"
+
+ 34. If we want to put the date in angular
+     Ex: 
+
+ 35. Angular lazy loading (we have to generate the module like this: ng g module module_name --routing)
+     Ex: {path: 'home',
+          loadChildren: './participant/participant-auth/external-pages.module#ExternalPagesModule'
+         },
+
+ 36. If we want to get url parameters 
+     Ex: var orderId = getUrlVars()["orderId"];
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANGULAR STUFF:
+
+ 1. Angular button by calling functions:
+   when we want to disable the button based on condition :  <button [disabled]="isUnchanged">Disabled Button</button>
+   <button (click)="deleteHero()">Delete hero</button>
+   <button (click)="onSave($event)">Save</button>
+   <button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
+   <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
+
+ 
+ 2. Property Binding:
+  If we want to bind the image 
+   EX: <img [src]="itemImageUrl">    APP.html
+       itemImageUrl = '../assets/phone.png';     --> APP.ts
+
+
+ 3. If we want to form read only just use -- >  readonly 
+ 
+ 4. If we want to store the details in local storage  --> localStorage.setItem('Details',JSON.stringify(Setdetails)); 
+
+ 5. If we want to fetch the details from local storage 
+    Ex: this.details = JSON.parse(localStorage.getItem('Details'))  // this.details is the name of variable
+
+ 5. If we want to clear the local storage ------>    localStorage.clear();
+ 6. If we want to fetch the url in angular 
+     Ex: import { Router } from '@angular/router';
+         private router: Router
+         console.log("This.window.url", this.window.url);   // required place
+
+ 7. If we want to transfer the data from one component to another compoent if there is no relation b/w them then better t use services then call the function.
+   
+    step1: import service in component1 and write that service in constructor 
+         Ex: import {ModeratorService} from '../../../moderator/services/moderator.service';
+             private Service : ModeratorService
+             this.Service.shareddata(this.router.url) 
+
+    step2:  inservice.ts
+        Ex: shareddata(data){
+          this.transerdata = data;
+           }
+
+           senddata1(){
+           return this.transerdata
+            }
+
+   step3: component2.ts
+        Ex: let data = this.service.senddata1();
+
+
+ 8.If we want to navigate the page 
+   --> import {Router} from '@angular/router';
+   --> private router : Router,
+   -->this.router.navigate(['/component_name'])
+
+ 9. If we want to append the data to the form data(already existed);
+    --> this.userForm.patchValue({
+      "something":this.somethingdata
+       })
+
+    
+ 10. Form fileds in angular :
+   
+      Form: 
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="title" class="label">Old Password</label><br>
+            <input type="password" class="form-control"  placeholder="Old Password" (keydown.space)="$event.preventDefault                      ()" [(ngModel)]="old_pass" minlength="8">
+          </div>
+        </div>
+      </div>
+
+
+ 11. <input type="text" [(ngModel)]="anotherid"> field creation 
+
+ 12. updown buttons 
+Ex: <i class="fa fa-caret-down down" style="cursor: pointer; color: rgb(12, 10, 10); float:right;margin-top: 1%;" (click)="getAllParticipantliseDsc($event,'first_name')"></i>    --> html
+   
+--> .ts file
+    if(event.target.classList[2] === 'down') {
+      event.target.classList = '';
+      event.target.className += 'fa fa-caret-up up'; 
+    }
+    else {
+      event.target.classList = '';
+      event.target.className += 'fa fa-caret-down down';
+    }
+
+ 14. btoa --> for encoding the string.
+
+ 15. atob --> for decoding the string.
+
+ 16. importing jquery library  --> import * as $ from 'jquery';
+
+ 17. importing moment library  --> import * as moment from 'moment';
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Mysql concepts:
+//mysql querys
+1. if we want to create a database 
+   create database database_name;
+   EX: create database MYDB1;
+   
+   
+2.if we want to see the created database
+    show databases;
+    EX:show databases;
+    
+3.if we want to create a table in the required database
+    use database_name;
+    EX: use MYDB1;
+        create table table_name( );
+    EX: create table persons(id int, name varchar(255) );
+    
+4.if we want to see created table in the database;
+    show tables;
+    EX: show tables;
+  if we want to see table in the field format;
+       table table_name;
+    EX: describe persons; 
+    
+    
+5. if we want to delete database
+   drop database database_name;
+   EX: drop database MYDB1;
+   
+ 
+6. if we want to delete table from the database
+     use database_name;
+     drop tablename;
+     EX: drop persons;
      
-             (or)
-
-   4.return       // if (rows.affectedRows == 0) 
-
-   Queue
-   11.Send  DeleteMeAsSecondaryUserResponse to config.SERVER_NAME
-   15.Send DynamicAlmondDeleteResponse,DynamicUserDeleteResponse to MobileQueue
+     
+7. if we want to insert data into table
+    insert into table_name()
+    value();
+    EX: insert into persons(id, name)
+        value(156, "gowrav rahul");
+        
+8. if we want to delete data from the table
+   delete from table_name where condition
+   EX: delete from persons where name = "gowrav rahul";
    
-   Functional
-   1.Command 1110
-
-   7.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-  12.delete store[id]
-
-  13.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.DeleteMeAsSecondaryUser)->RM(getAlmond)->deleteUser->SM(removeSecondaryAlmond)->RM(removeSecondaryAlmond)->RM(removeSecondaryUserFromMAC)-> RM(removeMACFromUser)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile)->dispatcher(unicast)->broadcaster(unicast)->RM(getAlmond)->CB(incCommandID)->generator(getCode)->Random_Key->RM(redisExecute)->RM(setAndExpire)->redisClient(setex)->AQP(sendToQueue)->dispatcher(broadcast)->broadcaster(broadcast)->MS(getSockets)->requestQueue(del)->MS(sendRequest)->MS(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-   <a name="1110e"></a>
-command type:DeleteSecondaryUserRequest
-## 26)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.DELETE FROM AlmondSecondaryUsers
-   Params:AlmondMAC,userID
-
-   3.DELETE FROM NotificationPreferences
-   Params:AlmondMAC,userID
-
-   Redis
-   4.hdel on AL_:<AlmondMAC>      // value:SUSER_secondaryUser
-
-   5.hdel on UID_:<secondaryUser>  // value:SMAC_AlmondMAC
-
-   7.hgetall on AL_:<AlmondMAC>
-
-   8.get on ICID_<string>              // here <string> = random string data
-
-   9.setex on ICID_<string>,TIMEOUT,config.SERVER_NAME    // here <string> = random string data
-
-   multi
-  13.hgetall on UID_<userID>
-
-   Queue
-  10.Send  DeleteMeAsSecondaryUserResponse to config.SERVER_NAME
-
-  14.Send DynamicAlmondDeleteResponse,DynamicUserDeleteResponse to MobileQueue
-
-   Functional
-   1.Command 1110
-
-   6.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   11.delete store[id]
-
-   12.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.DeleteSecondaryUser)->deleteUser->SM(removeSecondaryAlmond)->RM(removeSecondaryAlmond)->RM(removeSecondaryUserFromMAC)->RM(removeMACFromUser)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->MS(writeToMobile)->dispatcher(unicast)->broadcaster(unicast)->RM(getAlmond)->CB(incCommandID)->generator(getCode)->Random_Key->RM(redisExecute)->RM(setAndExpire)->AQP(sendToQueue)->dispatcher(broadcast)->broadcaster(broadcast)->requestQueue(del)->MS(sendRequest)->MS(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-   <a name="1110f"></a>
-command type:UserInviteRequest
-## 27)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM Users
-   Params:EmailID
-
-   4.select from AlmondSecondaryUsers
-   Params:AlmondMAC, UserID
-
-   5.INSERT INTO AlmondSecondaryUsers
-   Params:AlmondMAC, userID
-
-   8.Select from Users
-   Params:UserID
-
-   Redis
-   3.hgetall on UID_:<packet.userid>
+9. if we want to retrieve a single column of data from the database
+   select *from table_name where condition //required column 
+   EX:select *from persons where name  = "gowrav rahul";
+   
+10.if we want to retrieve the data when 2conditions will be satisfied
+   select *from table_name where condition and condition 
+   EX: select *from persons where name!="gowrav rahul" and id=156;
+   
+11.if we want to retrieve the data when the condition is satisfied
+   select *from table_name where condition like "required_condtion";
+   EX: select *from persons where name like"go%";
+   
+   
+12.if we want to delete row from the database 
+    delete from table_name where condition
+   EX: delete from persons where id = 156;
+   
+   
+13.if we want to delete the column from the database
+   alter table table_name drop column column_name
+   EX: alter table persons drop column name;
+   
+   
+14.if we want to count rows in the database
+   select count(*)from table_name
+   EX:select count(*)from persons;
+   
+15.if we want to update the data in the database
+   update table_name set column_name = "required data" where condition
+   EX: update persons set name = "pentakota rahul"  where id = 156;
+   
+   //select distinct //it avoids duplicates from the column
+16.if we want to retrieve only once existing data in the column 
+   select distinct column_name from table_name
+   EX: select distinct name from persons;
+   
+17.and , or ,  not operators
+  //not 
+  select *from data where not name = "pakistan";
   
-   6.hmset on AL_:<AlmondMAC>                // value=SUSER_<packet.userid>, 1
-
-   7.hmset on UID_:<packet.userid>          // value=SMAC_<AlmondMAC>, 1
-
-   9.hgetall on AL_:<AlmondMAC>
-
-   11.hgetall on AL_:<AlmondMAC>
-
-   12.get on ICID_<string>                // here <string> = random string data
-
-   13.setex on ICID_<string>,TIMEOUT,config.SERVER_NAME    // here <string> = random string data
-   
-   multi
-   17.hgetall on UID_:<data.SecondaryUsers>
-
-   Queue
-   14.Send  UserInviteRequestResponse to config.SERVER_NAME
-
-   18.Send  UserInviteResponse to MobileQueue
-
-   Functional
-   1.Command 1110
-
-   10.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   15.delete store[id]
-
-   16.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.UserInvite)->CheckIfEmailExists-> RM(getAlmonds)->SM(checkSecondary)->SM(addSecondaryAlmond)->RM(addSecondaryAlmond)->RM(addSecondaryUserToMAC)->RM(addMACToUser)->addUser->SM(getEmail)->RM(getAlmond)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(unicast)->broadcaster(unicast)->RM(getAlmond)->CB(incCommandID)->generator(getCode)->Random_Key->RM(redisExecute)->RM(setAndExpire)->AQP(sendToQueue)->dispatcher(broadcast)->broadcaster(broadcast)->MS(getSockets)->requestQueue(del)->MS(sendRequest)->MS(writeToMobile)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-
-   <a name="1110g"></a>
-command type:UnlinkAlmondRequest
-## 28)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT from Users
-   Params: EmailID
-
-   Redis
-   3.hgetall on AL_:<AlmondMAC>
-
-   5.hgetall on AL_:<AlmondMAC>
-
-   Queue
-   6.Send  UnlinkAlmondResponse to almondserver
-
-   Functional
-   1.Command 1110
-
-   4.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->validator(checkCredentials)->SM(getUser)->validator(check)->RM(verifyAffiliation)->RM.getUsers->processor(do)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(unicast)->commandMapping.unicast(AM_J.getAlmond)->RM(getAlmond)->broadcaster(unicast)->AQP(sendToQueue).
-
-
-   <a name="1110h"></a>
-command type:UserProfileRequest
-## 29)Command 1110
-   Command no
-   1110- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM Users
-   Params:UserID
-
-   Functional
-   1.Command 1110
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(AM_J.UserProfile)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="300"></a>
-command type:NotificationPreferences
-## 30)Command 300
-   Command no
-   300- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Insert on NotificationPreferences
-     params: AlmondMAC, DeviceID, UserID,IndexVal, NotificationType
-
-   Redis
-   4.hgetall on UID_:<userList>      //here, multi is done on every userID in UserList
-
-   Queue
-   5.Send NotificationPreferencesResponse to MobileQueue
-
-   Functional
-   1.Command 300
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(update_notification_preferences)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(broadcast)->broadcaster(broadcast)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-   <a name="283"></a>
-command type:NotificationDeleteRegistrationRequest
-## 31)Command 283
-   Command no
-   283- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.DELETE FROM NotificationID
-   Params:HashVal, RegID, Platform
-
-   Functional
-   1.Command 283
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(Mobile_Notification_Delete_Registration)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-  <a name="281"></a>
-command type:NotificationAddRegistration
-## 32)Command 281
-   Command no
-   281- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM NotificationID
-   Params:HashVal
-
-   //if (rows.length == 0)
-   3.Insert on NotificationID
-     params: HashVal, RegID, UserID, Platform
-
-           (or)
-
-   //if (rows.length == 1)
-   3.Update on NotificationID
-     params:  UserID,Platform,RegID
-
-
-   Functional
-   1.Command 281
-
-   4.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(Mobile_Notification_Registration)->Notification_Process_And_Add->Notification_Update->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-  <a name="151"></a>
-command type:AlmondModeRequest
-## 33)Command 151
-   Command no
-   151- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM AlmondPreferences
-   Params:T1.AlmondMAC
-
-   Functional
-   1.Command 151
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(almond.get_almondmode)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="113"></a>
-command type:NotificationPreferenceListRequest
-## 34)Command  113
-   Command no
-   113- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM NotificationPreferences
-   params:AlmondMAC, UserID 
-
-   Functional
-   1.Command 113
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(get_notification_preference_list)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="102"></a>
-command type:CloudSanity
-## 35)Command  102 
-   Command no
-   102- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Functional
-   1.Command 102
-
-   2.Send listResponse,commandLengthType ToMobile       //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do).
-
-
-   <a name="6"></a>
-command type:Signup
-## 36)Command 6
-   Command no
-   6- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM Users
-   Params:EmailID 
-
-   Redis
-   4.hmset on UID_:<userid>         //value=[Q_config.SERVER_NAME,userSession.length - 1]
-
-   Functional
-   1.Command 6
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   //if (userSession.length == 1)
-   5.delete socketStore[socket.userid]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(accountSetup.Mob_Signup)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(socketHandler)->MS(remove)->RM(redisExecute).
-
-
-   <a name="3"></a>
-command type:Logout
-## 37)Command 3
-   Command no
-   3- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.DELETE FROM UserTempPasswords
-   Params:UserID, TempPassword
-
-   Redis
-   4.hmset on UID_:<userid>         //value=[Q_config.SERVER_NAME,userSession.length - 1]
-
-
-   Functional
-   1.Command 3
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   //if (userSession.length == 1)
-   5.delete socketStore[socket.userid]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(L.logout)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(socketHandler).
-
-
-  <a name="4"></a>
-command type:logoutall
-## 38)Command 4
-   Command no
-   4- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT from Users
-   Params:EmailID
-
-   3.DELETE FROM UserTempPasswords
-   Params:UserID
-
-   4.DELETE FROM NotificationID
-   Params:UserID
-
-   Redis
-   7.hmset on UID_<userid>        // where values = [Q_config.SERVER_NAME,0]
   
-   multi
-   8.hgetall on UID_<userID>          //here, multi is done on every userID in UserList
-
-   Queue
-   9.Send logoutallResponse to MobileQueue
-
-   Functional
-   1.Command 4
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   6.delete socketStore[userid]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->validator(checkCredentials)->SM(getUser)->processor(do)->commandMapping(L.logoutAll)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(socketHandler)->MS(removeAll)->dispatcher(broadcast)->broadcaster(broadcast)->sendToRemoteUsers->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-   <a name="2222"></a>
-command type:Restore
-## 39)Command 2222
-   Command no
-   2222- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Cassandra
-   2.select from almondhistory
-   Params:mac, type
-
-   Redis
-   4.hgetall on AL_:<almondMAC>
-
-   5.get on ICID_<string>                // here <string> = random string data
-
-   6.setex on ICID_<string>,TIMEOUT,config.SERVER_NAME    // here <string> = random string data
-
-   Queue
-   8.Send  RestoreResponse to config.SERVER_NAME
-
-   Functional
-   1.Command 2222
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   7.delete store[commandID] 
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(notificationFetcher.almondHistroy)->loggerPoint(execute)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(unicast)->broadcaster(unicast)->RM(getAlmond)->CB(incCommandID)->generator(getCode)->Random_Key->RM(redisExecute)->RM(setAndExpire)->AQP(sendToQueue).
-
-
-   <a name="1525"></a>
-command type:UpdateClientPreferences
-## 40)Command 1525
-   Command no
-   1525- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   //* if data.NotificationType == 0 *//
-   2.DELETE FROM WifiClientsNotificationPreferences
-   Params:AlmondMAC, ClientID, UserID
-
-   Redis
-   5.hgetall on UID_:<userList>
-
-   Queue
-   6.Send UpdateClientPreferencesResponse to MobileQueue
-
-   Functional
-   1.Command 1525
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   4.delete store[id]
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(change_wificlient_notification_preferences)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(broadcast)->broadcaster(broadcast)->MS(getSockets)->requestQueue(del)->MS(sendRequest)->RM(redisExecuteAll)->dispatchToQueues->AQP(sendToQueue).
-
-
-   <a name="1526"></a>
-command type:GetClientPreferences
-## 41)Command 1526
-   Command no
-   1526- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Select FROM WifiClientsNotificationPreferences
-   Params:AlmondMAC, UserID
-
-   Functional
-   1.Command 1526
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(get_wifi_notification_preferences)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-  <a name="1400"></a>
-command type:RuleList
-## 42)Command 1400
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Functional
-   1.Command 1400
-
-   2.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)commandMapping->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1200"></a>
-command type:DeviceList
-## 43)Command 1200
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT from DEVICE_DATA
-   Params:AlmondMAC
-
-   Redis 
-   multi
-   3.hgetall on (MAC:<AlmondMAC>,DeviceValues) 
-    //Here, multi is done on all AlmondMAC and the IDs present in DeviceValues  
-
-   Functional
-   1.Command 1200
-
-   4.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(device.execute)->genericModel(get)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1300"></a>
-command type:SceneList
-## 44)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT from SCENE
-   Params:AlmondMAC
-
-   Functional
-   1.Command 1300
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(genericModel.execute)->genericModel(get)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1"></a>
-command type:Login
-## 45)Command 1
-   Command no
-   1- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM Date, Users
-   Params:EmailID
-
-   3.INSERT INTO UserTempPasswords
-   Params:UserID, TempPassword, LastUsedTime
-
-   7.SELECT FROM Subscriptions
-   Params:AlmondMAC
-
-   Redis
-   4.hgetall on UID_:<UserID>
-
-   6.hincrby on UID_:<packet.userid>  //value=[Q_config.SERVER_NAME,1]
-
-   Functional
-   1.Command 1
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   8.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(L.Mob_Login)->L(manualLogin)->L(Mob_Add_TempPass)->L(SetMACsToUserRedis)->RM(getAllAlmonds)->dispatcher.dispatch(Response)->socketStore(writeToMobile)->dispatcher(socketHandler)->RM(redisExecute)->secondaryModel(L.GetSubscriptions)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="806"></a>
-command type:
-## 46)Command 806
-   Command no
-   806- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Functional
-   1.Command 806
-
-   2.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="804a"></a>
-command type:for device
-## 47)Command 804
-   Command no
-   804- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Cassandra
-   2.Select on dynamic_log
-   params: mac,id
-
-   Functional
-   1.Command 804
-
-   3.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(notification.get_logs)->getMACFromClientID->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="804b"></a>
-command type:for client
-## 48)Command 804
-   Command no
-   804- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.Select on WifiClients
-   params:AlmondMAC,ClientID
- 
-   Cassandra
-   3.Select on dynamic_log
-   params: mac,id
-
-   Functional
-   1.Command 804
-
-   4.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(notification.get_logs)->getMACFromClientID->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1004"></a>
-command type:Super_Login 
-## 49)Command 1004
-   Command no
-   1004- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM Users
-   Params:EmailID
-
-   3.INSERT INTO UserTempPasswords
-   Params:UserID, TempPassword, LastUsedTime
-
-   Redis
-   4.hgetall on UID_:<UserID>
-
-   6.hincrby on UID_:<packet.userid>  //value=[Q_config.SERVER_NAME,1]
-
-   Functional
-   1.Command 1004
-
-   5.Send listResponse,commandLengthType ToMobile //where listResponse = payload
-
-   Flow
-   socket(on)->LOG(debug)->validator(do)->processor(do)->commandMapping(L.Mob_Login)->L(manualLogin)->L(Mob_Add_TempPass)->L(SetMACsToUserRedis)->RM(getAllAlmonds)->dispatcher(dispatchResponse)->socketStore(writeToMobile)->dispatcher(socketHandler)->RM(redisExecute).
-
-
-   <a name="800"></a>
-command type:
-## 50)Command 800
-   Command no
-   800- XML format
-
-   Required
-   Command,CommandType,Payload
-
-   Cassandra
-   2.Select on notification_store.notification_records
-   params:usr_id
-
-   Functional
-   1.Command 800
-   3.Send listResponse,commandLengthType ToMobile    //where listResponse = payload
-
-   Flow
-   socket(packet)->validator(do)->processor(do)->notificationFetcher(getNotifications)->oldRowBuilder(get_notifications)->dispacher(dispatchResponse).
-
-
-   <a name="1050"></a>
-command type:AlmondPropertiesResponse
-## 51)Command 1050
-   Command no
-   1050- JSON format
-
-   Required
-   Command,CommandType,Payload
-
-   SQL
-   2.SELECT FROM AlmondProperties2
-   Params:AlmondMAC
-
-   Functional
-   1.Command 1050
-
-   3.Send listResponse,commandLengthType ToMobile    //where listResponse = payload
-
-   Flow
-socket(packet)->validator(do)->processor(do)->commandMapping(almond.AlmondProperties)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-   <a name="1011"></a>
-command type:CheckSubscriptionStatus
-## 52)Command 1011
-   Command no
-   1011- JSON format
-
-   Required
-   Command,CommandType,Payload
-
-   Redis
-   2.hgetall on UID_:<packet.userid>
-
-   Queue
-   3.Send  CheckSubscriptionStatus to config.SERVER_NAME
-
-   Functional
-   1.Command 1011
-
-   4.Send listResponse,commandLengthType ToMobile    //where listResponse = payload
-
-   Flow
-socket(packet)->validator(do)->processor(do)->commandMapping(SC.subscriptionCommands)->RM(getAlmonds)->AQP(sendToQueue)->dispatcher(dispatchResponse)->socketStore(writeToMobile).
-
-
-ALMOND SERVER
-## 1)Command 25-AffiliationAlmondComplete
-## 2)Command 63 a-AlmondModeChange
-## 3)Command 1050-DynamicAlmondProperties
-## 4)Command 63 b-AlmondNameChange sucess="true"
-## 5)Command 1063-UpdateIndex, UpdateDeviceIndex, UpdateDeviceName, AddScene, ActivateScene, UpdateScene, RemoveScene, RemoveAllScenes, AddRule, ValidateRule, UpdateRule, RemoveRule, RemoveAllRules, UpdateClient, RemoveClient, ChangeAlmondProperties. 
-## 6)Command 104-KeepAlive
-## 7)Command 1030-AlmondReset
-## 8)Command 21-AffiliationAlmondRequest
-## 9)Command 8-CloudReset
-## 10)Command 49-DynamicAlmondNameChange
-## 11)Command 153-DynamicAlmondModeChangeRequest
-## 12)Command 1702-HashList
-## 13)Command 106-AlmondValidationRequest
-## 14)Command 1600-AddWiredSlaveMobile,ReadyToAddAsSlave
-## 15)Command 1200-DynamicAllDevicesRemoved
-## 16)Command 1500-DynamicClientJoined "Action"="update"
-## 17)Command 1500-DynamicClientLeft "Action"="update"
-## 18)Command 1200-DynamicIndexUpdated "Action":"UpdateIndex"
-## 19)Command 1200-DynamicDeviceRemoved
-## 20)Command 1200-DynamicDeviceUpdated "Action":"update"
-## 21)Command 1300-DynamicSceneAdded "Action":"add"
-## 22)Command 1300-DynamicAllSceneRemoved "Action":"remove"
-## 23)Command 1300-DynamicSceneUpdated "Action":"update"
-## 24)Command 1300-DynamicSceneRemoved "Action":"remove"
-## 25)Command 1300-DynamicSceneActivated "Action":"update"
-## 26)Command 1500-DynamicClientAdded "Action":"add"
-## 27)Command 1500-DynamicClientUpdated "Action":"update"
-## 28)Command 1500-DynamicClientRemoved "Action":"remove"
-## 29)Command 1400-DynamicRuleAdded "Action":"add"
-## 30)Command 1400-DynamicRuleUpdated "Action":"update"
-## 31)Command 1400-DynamicRuleRemoved "Action":"remove"
-## 32)Command 1400-DynamicAllRulesRemoved "Action":"remove"
-## 33)Command 1100-RouterSummary
-## 34)Command 1100-GetWirelessSettings
-## 35)Command 1100-SetWirelessSettings
-## 36)Command 1100-RebootRouter
-## 37)Command 1100-SendLogs
-## 38)Command 1100-FirmwareUpdate
-## 39)Command 1050-AlmondProperties
-## 40)Command 1200-DynamicDeviceList
-## 41)Command 1200-DynamicDeviceAdded
-## 42)Command 1500-DynamicClientList
-## 43)Command 1500-DynamicAllClientsRemoved
-## 44) Command no-AffiliationAlmondRequest
-## 45) Command no-AffiliationCompleteResponse
-
-  <a name="25"></a>
-command type:AffiliationAlmondComplete
-## 1)Command 25 
-   Command no
-   25- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on CODE:<code>
-
-   9.Perform multi:
-     i. hmset on UID_<UserID>       // value = (PMAC_<AlmondMAC>,1)
-     ii. hmset on AL_<pMAC>         // value = (userID,key)
-     iii. hdel on AL_<pMAC>         // value = [subscriptionToken]
-
-
-   12.get on ICID_:<packet.ICID>    // value = null
-
-   14.hgetall on UID_<user_list>    // Returns all the queues for users in user_list
-
-   SQL
-   3.INSERT INTO AlmondUsers
-   Params:userID, AlmondMAC, AlmondName, LongSecret, ownership ,FirmwareVersion, AffiliationTS
-
-   /*if (rows.affectedRows == 1)*/
-   4.INSERT INTO AlmondProperties2
-   Params:AlmondMAC,Properties,MobileProperties
-
-   5.select from Subscriptions
-   Params:AlmondMAC
-
-   6.update on Subscriptions
-   Params:AlmondMAC, UserID
-
-   /*else*/
-   7.Update on Subscriptions
-      Params: AlmondMAC,UserID
-
-   8.select from UserTempPasswords
-   Params:UserID
-
-   Queue
-   13.Send Response to Queue from step 12 
-
-   15.Send Response to All Queues returned in Step 14
-
-   Functional
-   1.Command 25
-
-   8.delete affiliationStore[id]
-
-   10.Delete affiliationStore[data.AlmondMAC]
-
-   11.Send AffiliationAlmondCompleteResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->validate->commandMapping(AU.affiliation_almond_complete)->RM(getCode)->verify_affiliation_complete->checkAlexaCompatible->broadcaster(sendToBackground)->MS(removeAff)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->broadcaster(unicast)->RM(redisExecute).
-
-
-   <a name="63"></a>
-command type:AlmondModeChangeResponse success="true"
-## 2)Command 63 
-   Command no
-   63- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<unicastID>          // value = null
-
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   5.Send Response to All Queues returned in Step 4
-
-   Functional
-   1.Command 63
-
-   Flow  almondProtocol(on)->processor(do)->validate->commandMapping(AU.dummyModel)->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1050"></a>
-command type:DynamicAlmondProperties
-## 3)Command 1050 
-   Command no
-   1050-JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Queue
-   3.Send  DynamicAllDevicesRemovedResponse to BACKGROUND_QUEUEE
-
-   5.Send Response to All Queues returned in Step 
-
-   Redis
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Functional
-   1.Command 1050
-
-   2.Send DynamicAlmondPropertiesResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->validate->commandMapping(AU.properties)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-<a name="63"></a>
-command type:AlmondNameChange sucess="true"
-## 4)Command 63
-   Command no
-   63-XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<unicastID>            // value = null
-
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   5.Send Response to All Queues returned in Step 4
-
-   Functional
-   1.Command 63
-
-   Flow
-almondProtocol(on)->processor(do)->validate->commandMapping(AU.dummyModel)->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-<a name="1063"></a>
-command type:UpdateIndex, UpdateDeviceIndex, UpdateDeviceName, AddScene, ActivateScene, UpdateScene, RemoveScene, RemoveAllScenes, AddRule, ValidateRule, UpdateRule, RemoveRule, RemoveAllRules, UpdateClient, RemoveClient, ChangeAlmondProperties. 
-  ## 5)Command 1063
-   1063-JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>                 // value = null
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1063
-
-   Flow
-   almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->RM(redisExecute)->publisher(sendToQueue).
-
-
-<a name="104"></a>
-command type:KeepAlive
-## 6)Command 104
-   Command no
-   104- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   3.hmset on AL_:<socket.almondMAC>   
-                           // value=[status, 1, serverconfig.Connections.RabbitMQ.Queue]
-                  
-   Cassandra
-   // if (socket.zenAlmond)
-   4.Update on cloudlogs.connection_log
-     params: dateyear, mac
-
-   Functional
-   1.Command 104
-
-   2.delete socket.almondOnline
-
-   Flow
-   almondProtocol(on)->processor(do)->commandMapping(MS.keepAlive)->RS(updateAlmond).
-
-
-   <a name="1030"></a>
-command type:AlmondReset
-## 7)Command 1030
-   Command no
-   1030- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Functional
-   1.Command 1030
-
-   2.Send AlmondResetResponse to Almond
-
-   Flow
-   almondProtocol(on)->processor(do)->commandMapping(AU.almondReset)->sendToAlmond->socketStore(writeToAlmond).
-
-
-  x<a name="21"></a>
-command type:AffiliationAlmondRequest
-## 8)Command 21
-   Command no
-   21- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM AlmondUsers
-   Params:AlmondMAC, ownership
-
-   3.SELECT FROM AllAlmondPlus
-   Params:AlmondMAC
-
-   Redis
-   4.hgetall on CODE:<code>           // here code= get_random_string
-
-   5.setex on CODE:<code>        
-      // where code = random string,values =AlmondMAC+config.Connections.RabbitMQ.Queue
-
-   Functional
-   1.Command 21
-
-   6.Send AffiliationAlmondResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.affiliation_almond)->AFF(affiliate_almond)->Check_If_Affiliated->Almond_ID_Check->generator(getCode)->Random_Key->RM(redisExecute)->RM(setAndExpire)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond).
-
-
-   <a name="8"></a>
-command type:CloudReset
-## 9)Command 8
-   Command no
-   8- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   3.Send CloudReset to BACKGROUND_QUEUE
-
-   5.Send Response to All Queues returned in Step 4 
-
-   Functional
-   1.Command 8
-
-   2.Send CloudResetResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.almondReset)->sendToAlmond->socketStore(writeToAlmond)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues.
-
-
-<a name="49"></a>
-command type:DynamicAlmondNameChange
-## 10)Command 49
-   Command no
-   49- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Queue
-   3.Send DynamicAlmondNameChange to BACKGROUND_QUEUE
-
-   5.Send Response to All Queues returned in Step 4
-
-   Redis
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Functional
-   1.Command 49
-
-   2.Send DynamicAlmondNameChangeResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-  <a name="153"></a>
-command type:DynamicAlmondModeChange
-## 11)Command 153
-   Command no
-   153- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Queue
-   3.Send DynamicAlmondNameChange to BACKGROUND_QUEUE
-
-   5.Send Response to All Queues returned in Step 4
-
-   Redis
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Functional
-   1.Command 153
-
-   2.Send DynamicAlmondModeChangeResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.almondmode_change)->sendToAlmond->socketStore(writeToAlmond)->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1702"></a>
-command type:HashList
-## 12)Command 1702
-   Command no
-   1702- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   3.hmset on AL_:<socket.almondMAC>     //values=["router", payload.RouterMode]
-
-   Functional
-   1.Command 1702
-
-   2.delete socket[i]
-
-   4.Send HashListResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.checkAllHash)->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond).
-
-
-   <a name="106"></a>
-command type:AlmondValidationRequest
-## 13)Command 106
-   Command no
-   106- XML format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   SQL
-   2.SELECT FROM AllAlmondPlus
-   Params:AlmondMAC
-
-   Functional
-   1.Command 106
-
-   3.Send AlmondValidationRequestResponse to Almond
-
-   Flow
-   almondProtocol(on)->processor(do)->validate->commandMapping(AU.Almond_Validate)->sendToAlmond->socketStore(writeToAlmond).
-
-
-<a name="1600a"></a>
-command type:ReadyToAddAsSlave,AddWiredSlaveMobile
-## 14)Command 1600 
-   Command no
-   1600- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   multi
-   2.hgetall on UID_:<userList>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1600
-
-   Flow
-almondProtocol(on)->processor(do)->validate->commandMapping(AU.dummyModel)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
- <a name="1200"></a>
-command type:DynamicAllDevicesRemoved
-## 15)Command 1200 
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    // value=[mapper.hashColumn, payload.HashNow]
-
-   5.hgetall on UID_<user_list>        // Returns all the queues for users in user_list
-
-   Queue
-   4.Send  DynamicAllDevicesRemovedResponse to BACKGROUND_QUEUEE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1200
-
-   3.Send DynamicAllDevicesRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->validate->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->publisher(sendToQueue).
+18.//order by assc = low to high and desc = high to low
+  if we want to sort the data either asscending or descending
+  select *from table_name order by required column_name
+  EX: select *from persons order by name;
+  // If we want to sorting multiple columns 
+  EX: select *from persons order by name, id,;
+  //If we want to sorting descending order
+  EX: select *from persons order by name desc;
   
-
-<a name="1500"></a>
-command type:DynamicClientJoined "Action"="update"
-## 16)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientJoined to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-
-   3.Send DynamicClientJoinedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-<a name="1500"></a>
-command type:DynamicClientLeft "Action"="update"
-## 17)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientLeft to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-
-   3.Send DynamicClientLeftResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
    
-
-<a name="1200"></a>
-command type:DynamicIndexUpdated "Action":"UpdateIndex"
-## 18)Command 1200
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   7.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicIndexUpdated to config.ALEXA_QUEUE
-
-   6.Send DynamicIndexUpdated to BACKGROUND_QUEUE
-
-   8.Send Response to All Queues returned in Step 7
-
-   Functional
-   1.Command 1200
-
-   3.Send DynamicIndexUpdatedResponse to Almond
-
-   5.delete packet.alexa
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground-> broadcaster(sendToBackground)->sendToHttp->publisher(sendToQueue)->->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1200"></a>
-command type:DynamicDeviceRemoved
-## 19)Command 1200
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicDeviceRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1200
-
-   3.Send DynamicDeviceRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground-> broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1200"></a>
-command type:DynamicDeviceUpdated "Action":"update"
-## 20)Command 1200
-   Command no
-   1200- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicDeviceUpdated to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1200
-
-   3.Send DynamicDeviceUpdatedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground-> broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues.
-
-
-   <a name="1300"></a>
-command type:DynamicSceneAdded "Action":"add"
-## 21)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicSceneAdded to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1300
-
-   3.Send DynamicSceneAddedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->publisher(sendToQueue).
-
-   
-   <a name="1300"></a>
-command type:DynamicAllSceneRemoved "Action":"remove"
-## 22)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>       //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicAllSceneRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1300
-
-   3.Send DynamicAllSceneRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->publisher(sendToQueue).
-
-   
-   <a name="1300"></a>
-command type:DynamicSceneUpdated "Action":"update"
-## 23)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>       //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicSceneUpdated to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1300
-
-   3.Send DynamicSceneUpdatedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->publisher(sendToQueue).
-
-
-   <a name="1300"></a>
-command type:DynamicSceneRemoved "Action":"remove"
-## 24)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>       //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicSceneRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1300
-
-   3.Send DynamicSceneRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->publisher(sendToQueue).
-
-
-   <a name="1300"></a>
-command type:DynamicSceneActivated "Action":"update"
-## 25)Command 1300
-   Command no
-   1300- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>       //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicSceneActivated to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1300
-
-   3.Send DynamicSceneActivatedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->publisher(sendToQueue).
-
-
-   <a name="1500"></a>
-command type:DynamicClientAdded "Action":"add"
-## 26)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]\
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientAdded to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-
-   3.Send DynamicClientAddedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1500"></a>
-command type:DynamicClientUpdated "Action":"update"
-## 27)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]\
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientUpdated to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-
-   3.Send DynamicClientUpdatedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1500"></a>
-command type:DynamicClientRemoved "Action":"remove"
-## 28)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-
-   3.Send DynamicClientRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1400"></a>
-command type:DynamicRuleAdded "Action":"add"
-## 29)Command 1400
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicRuleAdded to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1400
-
-   3.Send DynamicRuleAddedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcast->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-<a name="1400"></a>
-command type:DynamicRuleUpdated "Action":"update"
-## 30)Command 1400
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicRuleUpdated to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1400
-
-   3.Send DynamicRuleUpdatedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcast->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1400"></a>
-command type:DynamicRuleRemoved "Action":"remove"
-## 31)Command 1400
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicRuleRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1400
-
-   3.Send DynamicRuleRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcast->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-   <a name="1400"></a>
-command type:DynamicAllRulesRemoved "Action":"remove"
-## 32)Command 1400
-   Command no
-   1400- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.hmset on AL_:<AlmondMAC>    //value=[mapper.hashColumn, payload.HashNow]
-
-   Redis
-   multi
-   5.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicAllRulesRemoved to BACKGROUND_QUEUE
-
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1400
-
-   3.Send DynamicAllRulesRemovedResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.execute)->updateHash->RM(updateAlmond)->dispatchResponses->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcast->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-   
-  <a name="1100"></a>
-command type:RouterSummary
-## 33)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1100"></a>
-command type:GetWirelessSettings
-## 34)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1100"></a>
-command type:SetWirelessSettings
-## 35)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1100"></a>
-command type:RebootRouter
-## 36)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1100"></a>
-command type:SendLogs
-## 37)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1100"></a>
-command type:FirmwareUpdate
-## 38)Command 1100
-   Command no
-   1100- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Redis
-   2.get on ICID_:<packet.ICID>
-
-   Queue
-   3.Send Response to All Queues returned in Step 2
-
-   Functional
-   1.Command 1100
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.dummyModel)->unicast->broadcaster(unicast)->RM(redisExecute)->publisher(sendToQueue).
-
-
-   <a name="1050"></a>
-command type:AlmondProperties
-## 39)Command 1050
-   Command no
-   1050- JSON format
-
-   Required
-   Command,CommandType,Payload,almondMAC
-
-   Queue
-   3.Send AlmondProperties to BACKGROUND_QUEUE
-
-   5.Send Response to All Queues returned in Step 4
-
-   Redis
-   multi
-   4.hgetall on UID_:<userList>       // Returns all the queues for users in user_list
-
-   Functional
-   1.Command 1050
-
-   2.Send AlmondPropertiesResponse to Almond
-
-   Flow
-almondProtocol(on)->processor(do)->commandMapping(AU.properties)->sendToAlmond->socketStore(writeToAlmond)->sendToBackground->broadcaster(sendToBackground)->publisher(sendToQueue)->broadcaster(send)->writeToMobileSockets->broadcaster(sendToRemoteUsers)->RM(redisExecuteAll)->sendToQueues->publisher(sendToQueue).
-
-
-  <a name="1200"></a>
-command type:DynamicDeviceList
-## 40)Command 1200
-   Command no
-   1200- JSON format
-
-   Required
-   Command,UID,CommandType,Payload
-
-   Redis  
-   2.hmset on AL_<AlmondMAC>          //value = [mapper.hashColumn, payload.HashNow]
-   5.hgetall on UID_<user_list>        // Returns all the queues for users in user_list
-   Queue
-   4.Send DynamicDeviceList to BACKGROUND_QUEUE
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1200
-   3.Send DynamicDeviceListResponse to Almond
-
-   Flow
-almondProtocol(packet)->processor(do)->processor(validate)->almondUsers(execute)->processor(dispatchResponses),processor(sendToBackground)->broadcaster(sendToBackground)->processor(broadcast)->broadcaster(send).
-
-
-   <a name="1200"></a>
-command type:DynamicDeviceAdded
-## 41)Command 1200
-   Command no
-   1200- JSON format
-
-   Reqired
-   Command,UID,CommandType,Payload
-
-   Redis   
-   2.hmset on AL_<AlmondMAC>          //value = [mapper.hashColumn, payload.HashNow]
-   5.hgetall on UID_<user_list>        // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicDevieAdded to BACKGROUND_QUEUE
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1200
-   3.Send DynamicDeviceAddedResponse to Almond
-
-   Flow
-   almondProtocol(packet)-> processor(do)->processor(validate)->almondUsers(execute)->processor(dispatchResponses),processor(sendToBackground)->broadcaster(sendToBackground)->processor(broadcast)->broadcaster(send)
-
-
-   <a name="1500"></a>
-command type:DynamicClientList
-## 42)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,UID,CommandType,Payload
-
-   Redis   
-   2.hmset on AL_<AlmondMAC>           // value = [mapper.hashColumn, payload.HashNow]
-   5.hgetall on UID_<user_list>        // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicClientList to BACKGROUND_QUEUE
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-   3.Send DynamicClientListResponse to Almond
-
-   Flow
-almondProtocol(packet)->processor(do)->processor(validate)->almondUsers(execute)->processor(dispatchResponses),processor(sendToBackground)->broadcaster(sendToBackground)->processor(broadcast)->broadcaster(send).
-
-
-  <a name="1500"></a>
-command type:DynamicAllClientsRemoved
-## 43)Command 1500
-   Command no
-   1500- JSON format
-
-   Required
-   Command,UID,CommandType,Payload
-
-   Redis   
-   2.hmset on AL_<AlmondMAC>           // value = [mapper.hashColumn, payload.HashNow]
-   5.hgetall on UID_<user_list>        // Returns all the queues for users in user_list
-
-   Queue
-   4.Send DynamicAllClientsRemoved to BACKGROUND_QUEUE
-   6.Send Response to All Queues returned in Step 5
-
-   Functional
-   1.Command 1500
-   3.Send DynamicAllClientsRemovedResponse to Almond
-
-   Flow
-almondProtocol(packet)->processor(do)->processor(validate)->almondUsers(execute)->processor(dispatchResponses),processor(sendToBackground)->broadcaster(sendToBackground)->processor(broadcast)->broadcaster(send).
-
-
-   <a name="1020a"></a>
-command type: AffiliationAlmondRequest
-## 44) Command no
-   Command no
-   1020- JSON format
-
-  Required
-  Command,CommandType,Payload,AlmondMAC
-
-  SQL -
-  2.Select on AlmondUsers
-      params: AlmondMAC, ownership
-  3.Select on AllAlmondPlus
-      params:AlmondMAC
-  4.Insert on AllAlmondPlus
-      params: AlmondMAC, AlmondID, FactoryDate, FactoryAdmin
-
-  Redis
-  5.hgetall on CODE:code                  // where code = random string 
-  6.setex on CODE:code  
-    // where code = random string,values =AlmondMAC + config.Connections.RabbitMQ.Queue
-
-  Functional
-  1.Command 1020
-  7.Send AffiliationAlmondRequestResponse to Almond
-
- Flow
- almondProtocol(packet)-> processor(do)->processor(validate)->almondUsers(affiliation_almond)->affiliate-almond(affiliate_almond)->processor(dispatchResponses).
-
-
-<a name="1020a"></a>
- command type: AffiliationCompleteResponse
-  ## 45) Command no
-  Command no
-  1020- JSON format
-
-  Required
-  Command,CommandType,Payload,AlmondMAC
-
-  SQL 
-  3.INSERT on AlmondUsers
-    Parameters: userID,AlmondMAC,AlmondName,LongSecret,ownership,FirmwareVersion,AffiliationTS
-   
-  // If(rows are affected)
-  4.INSERT on AlmondProperties2
-     Parameters: AlmondMAC,Properties,MobileProperties
-  5.Select on Subscriptions
-     params: AlmondMAC
-
-  // if ((rsData.CMSCode && sRows[i].CMSCode == rsData.CMSCode) || (!rsData.CMSCode &&
-  !sRows[i].CMSCode))
-  6.Update on Subscriptions
-    params: AlmondMAC, UserID
-
-  //else
-  7.Update on Subscriptions
-    Params: AlmondMAC,UserID
-
-  //check alexa compatible
-  8.Select on UserTempPasswords
-      Params: UserID
-
-  Redis
-  2.Get CODE:<code>                 // value = null
-  9.Perform multi:
-    i. hmset on UID_<UserID>       // value = (PMAC_<AlmondMAC>,1)
-    ii. hmset on AL_<pMAC>         // value = (userID,key)
-    iii. hdel on AL_<pMAC>         // value = [subscriptionToken]
-
-  12.Get ICID_<packet.ICID>        // value = null
-  14.hgetall on UID_<user_list>    // Returns all the queues for users in user_list
-
-  Queue
-  13.Send Response to Queue from step 12 
-  15.Send Response to All Queues returned in Step 14
-
-  Functional
-  1.Command 1020
-  10.Delete affiliationStore[data.AlmondMAC]
-  11.Send AffiliationAlmondCompleteResponse to Almond
-
-  Flow
-almondProtocol(packet)->processor(do)->processor(validate)->almondUsers(affiliation_almond_complete),almondUsers(verify_affiliaion_complete)->processor(dispatchResponses),processor(unicast)->broadcaster(unicast)->processor(broadcaster)->broadcaster(send).
+19. // union   //if we want to combine two or more results sets 
+ EX: select *from data
+     union 
+     select *from data1; //but same no.of columns will be there in two tables;
+// Note:The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL
+
+
+20.//insert into select 
+  //if we want to put one table data into into table
+  EX: insert into table_2
+      select *from table_1;
+
+
+21. // in operator
+    // if we want to retrieve some required rows of data 
+    // select *from table_name where column_name in (required data names);
+    EX: select *from persons where name in ("rahul", "gowrav");
+    
+22. //Truncate
+    //It is used for clear the data in the table or database
+    EX: truncate table_name (or) truncate database_name
+      
+MYSQL FUNCTIONS:
+1. CHAR_LENGTH
+  EX: select char_length("gowrav rahul) as lengthOfString;
+  EX: select char_length(name) as lengthOfname from mydata(tablename);
+  
+2. SELECT CURRENT_DATE();  (or) select curdate();
+  //If we want to get the today date 
  
+3.select current_timestamp();
+// If we want to get today date with time
+
+4.select date(2017-06-06);
+// If we want to retrieve the data at that date from the table
+
+5.select date_add("2017-01-23", interval 10 day);
+//If we want to add 10 days from the mention date
+
+6.select dayname("1992-09-12");
+//If we want to know the dayname in the mention date
+
+7.select now();
+//If we want to get current date and time 
+
+8.select char_length("hello world") as lengthofstring;
+//If we want to find the length of the string
+
+9.select concat("gowrav" " " "rahul") as concatenatedstring;
+//If we want to add two more strings 
+
+10.select field(finding_value, value1, value2, value3, value4, value5);
+  EX: select field(4, 3,4,5,6,7,8,9); =>o/p is 2
+  //If we want to find the index position
+
+
+...............................................................................................................................................................................................................
+ MYSQL stuff:
+ 1. If we want to find the data is there or not in the table :
+      --> con.query(`SELECT * FROM moderator WHERE moderator.email = ?`, [req.body.email], (err, event) => { console.log(event) });
+                         (Or)
+      -->var sql2 = "SELECT * FROM conference WHERE id = '" + conference_id + "'";
+   
+ 2. If we want to insert the data into table
+     let obj = { name: 'rahul", age:'24' }
+      -->con.query('INSERT INTO moderator SET ?', obj, (err, data) => {  console.log(data) });
+                       (or)
+  If we want to insert data into table
+    --> var sql_ins = "INSERT INTO conference_notes (conference_id,user_id,participant_id,moderator_id,notes,running_conference_time) VALUES ('" + conference_id + "','" + user_id + "','" + participant_id + "','" + moderator_id + "','" + notes + "','" + running_conference_time + "')";
+
+
+3. If we want to update the data into table
+    --> let query = 'UPDATE tbl_current_presentor SET ? WHERE conference_id = ?';
  
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ JAVASCRIPT STUFF:
+  1. For date format : var date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+  2. md5 () --> is used for hashing.
+  3. parseInt(data)    // here data is the time for getting round value. it's like a flor
+  4. this.allevents.forEach((ele) => { 
+      console.log(ele) )};  
+  5. promises : 
+
+      var totalCount = new Promise((resolve, reject) => {
+      var countQuery =
+      "SELECT count(*) as total FROM conference WHERE moderator_id =" +
+        moderator_id;
+       con.connect(function (err) {
+       con.query(countQuery, (err, count) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(count);
+        }
+      });
+    });
+  });
+
+ 6. Promise important code :
+  EX : 
+ FILE1.JS     --> This data am return to some other file
+ exports.groupmsgcreate = function(data) {
+    return  new Promise((resolve,reject)=>{
+        let grpmsg = {
+                message: data.message,
+                userid: data.userid,
+                groupId:data.groupid
+               }
+            groupmsgs.GroupChat.create(grpmsg,(err, groupchatmsgres)=>{
+               console.log("returndata.......",groupchatmsgres)
+               resolve (groupchatmsgres);
+          }); 
+     })
+    };
+
+FILEF2.JS
+ var grpmsgreturndata  = grpmsgcontroller.groupmsgcreate(msgdata)
+                grpmsgreturndata.then(function(result){
+                    console.log("result",result);
+                    socket.emit("groupchatmsg",result);
+                })
  
+
+
+ 6. spread operator:Arrays
+var arr = ["1","2","3","4","5","6"];
+var arr1 = [...arr];
+arr1.push("7")
+console.log("arr",arr);
+console.log("arr1",arr1);
+
+
+var array1 = ["11","22","33","44"];
+var array2 = ["21","32","43","54"];
+var finalarray = [...array1,...array2]
+console.log(finalarray)
+
+ spread operator:Objects
+    const user1 = { 
+	name: 'rahul', 
+	age: 22, 
+   }; 
+
+const user2 = { 
+	name: "gowrav", 
+	location: "Philadelphia"
+    }; 
+const combindingobjs = {...user1,...user2}
+console.log(combindingobjs);
+
+
+7.adding and deletng from the object
+  var obj = {
+    key1 : "rahul"
+ }
+obj.key2 = "pentakota"
+delete obj.key1;
+console.log(obj);
+
+8.var obj = {name:"gowrav",location : "ahmedabad",age:24,tech:"mean stack"};
+for(let value of Object.values(obj)){  console.log(value)};
+
+9.Filters in javascript:
+EX:var array = ["1","2","3","4","5","6","7","8","9","10"];
+   var array1 = array.filter(item => item<6);
+   console.log(array1);
+
+10. Transforming an array // sorting of array
+EX: let arr = [ 1, 2, 15,5,8,9,1,25,65,12];
+    function valuescomp(a,b){
+     if (a>b) return 1;
+     if (a==b) return 0;
+     if (a<b) return -1;
+     };
+console.log(arr.sort(valuescomp))
+
+11. javascript array find method :
+ EX:  var data = allevents.find(element => element.type === 'local');   //all events is the array
+
+12. EventEmitter 
+ Ex:const eventEmitter = new EventEmitter();
+    eventEmitter.on('myEvent', () => {
+    console.log('Listener 1');
+   });
+    eventEmitter.emit('myEvent');  
+
+    application implementation : 
+    const eventEmitter = new EventEmitter();
+
+const app = express();
+app.set('eventEmitter', eventEmitter);
+//access it from any module of the application
+console.log(app.get('eventEmitter'));
+
+13.If we want to show the error
+  Ex : throw new Error("error",err);
+
+14. If we want to restrict const decleration object values chaging
+Syntax: Object.freeze()
+ Ex:  const obj = Object.freeze({
+       x : 200
+      });
+     obj.x = 250;
+     console.log(obj.x)
+
+15. If we want to know the IS IT ARRAY OR NOT
+Syntax : Array.isArray()
+Ex: var array1 = ['1','2','3','4','5'];
+    console.log(Array.isArray(array1));
+
+
+16.If we want to find any element in the Array
+Syntax: find()
+Ex: var array2 = ['1','2','3','4','5','6','7','8','9'];
+    function elementfinding(data){
+    return data == 5;
+    };
+var result = array2.find(elementfinding);
+console.log("find",result)
+
+17.Array every method
+Ex: var array3 = ['1','2','3','4','5','6','7','8','9'];
+    function f1(data){
+    return data>= 1;
+    };
+    console.log(array3.every(f1));
+
+18.Array filter method
+Ex: var array4 = ['12','23','34','45','56'];
+    function f2(data){
+    return data > 23
+    };
+    console.log(array4.filter(f2))
+
+
+19. Array forEach method similar to forloop but adavaced and prefered
+Ex: var array5 = ['1','2','3','4','5','6','7','8','9'];
+    function f3(x,y){
+    console.log(x,y)
+    };
+    array5.forEach(f3)
+
+20. String to an Array
+Ex: var text = "vindaloovoip solutions"
+    var result = Array.from(text);
+    console.log("result",result)
+
+21. // Array some method
+Ex: var array6 = ['12','23','34','45','56','67','65','75','78'];
+    function f4(data){
+    return data >= 55;
+    };
+    var result = array6.some(f4);
+    console.log("result",result);
+
+22. ByUsing isNaN we can know IS IT NUMBER OR NOR
+Ex : var text = 25;
+     console.log(isNaN(text));  --> true
+
+     var text = "GOWRAV";
+     console.log(isNaN(text));  --> false
+
+23. toPrecision (We can get required no of decimals)
+Ex: var number = 143.25;
+    var result = number.toPrecision(4);
+    console.log(result);
+
+24.  break forloop -- > it will break when condition satisfied
+Ex: var array7 = ['12','23','34','45','56','67','65','75','78','89','98'];
+    for(let i = 0; i<= array7.length; i++){
+    if(array7[i] >= 10){
+    console.log(array7[i])
+    break ;
+     };
+    };
+
+25. Spread Operator for objects
+Ex: var obj = {
+    name : 'rahul'
+    };
+   var obj2 = {...obj};
+   obj2.location = 'ahmedabad';
+   console.log(obj);
+
+26. Adding time 
+Ex: var minutesToAdd=150;  
+    var addtime =  new Date(date.getTime() + minutesToAdd*60000);
+
+27. If we want to pass multiple arguments info javascript function spread operator
+Ex: function multipleargs(...test){
+    console.log(test)
+    }
+    multipleargs(1,2,3,4,5);
+
+28. If we want the pass the object values into function
+Ex: function initiateTransfer({protocol, port, delay, retries, timeout, log}) {
+    console.log(protocol)
+    };
+    var options = {
+     protocol: 'http',
+     port: 800
+      }
+   initiateTransfer(options);
+
+29. Terinary operator in javascript
+EX: groupName: (data.userid >= data.receiverid) ? data.receiverid+"_"+data.userid : data.userid+"_"+data.receiverid
+
+30. Objects using constructor
+EX : function person(first_name,last_name){ 
+   this.first_name = first_name; 
+   this.last_name = last_name; 
+} 
+//creating new instances of person object 
+let person1 = new person('Mukul','Latiyan'); 
+let person2 = new person('Rahul','Avasthi'); 
+
+
+// Defining class using es6 
+class Vehicle { 
+  constructor(name, maker, engine) { 
+    this.name = name; 
+    this.maker =  maker; 
+    this.engine = engine; 
+  } 
+  getDetails(){ 
+      return (`The name of the bike is ${this.name}.`) 
+  } 
+} 
+// Making object with the help of the constructor 
+let bike1 = new Vehicle('Hayabusa', 'Suzuki', '1340cc'); 
+let bike2 = new Vehicle('Ninja', 'Kawasaki', '998cc'); 
+
+30. Callback function in javascript
+EX : <script> 
+function GFGexample(fact, callback){  
+  var myFact = "GeeksforGeeks Is Awesome, " + fact; 
+  callback(myFact); // 2 
+} 
+  
+function logFact(fact){ 
+  document.write(fact); 
+} 
+GFGexample("Learning is easy since", logFact); a
+</script>
+
+
+31.If we want to swtich from current directory to main directory: process.env.PWD
+
+32. for removing unwanted stuff in the javascript string: 
+ Ex: exports.sanitize = function(string) {
+  const reg = /[&<>"'/]/ig;
+  return string.replace(reg, (match)=>(''));
+  };
+
+33. How to remove the duplicat values from javascript array : https://stackoverflow.com/questions/38206915/filter-array-to-have-unique-values/43665883#43665883
+                                                            : https://stackoverflow.com/questions/9907419/how-to-get-a-key-in-a-javascript-object-by-its-value
+
+34. how to sort array of object based on filed :
+Ex: var sortedActivitie1s = values.sort((a, b) => b.timestamp - a.timestamp);
+
+35. string match :
+Ex: str.match("<(.*)>");
+
+36.let dateDuration = moment.duration(currentDate.diff(tokenDate));
+   dateDuration = dateDuration.asHours();
+   LINK: https://www.codegrepper.com/code-examples/javascript/adding+minutes+in+moment+js
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Node concepts: 
+
+ 1. Nodemailer -->for sending the email like otp or links
+
+ 2. curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+ sudo npm install -g n
+ sudo n 10.15  // 10.5 is the required version
+ npm install
+ npm audit fix
+ npm start
+
+
+ 5. connecting socket angular and node :
+  --> It requires in app.js file(backend):
+exports.io = require('socket.io')(httpsServer, {
+   cors : {
+      origins:['https://192.168.1.226:4200']
+   }
+ });
+  
+ 6. Export and Import
+Ex: export function sayHi(user) {      --> file1.js
+   alert(`Hello, ${user}!`);
+   };
+
+  import {sayHi} from './sayHi.js';    --> file2.js
+  sayHi('John'); // Hello, John!
+
+  7. Getting time zones 
+ Module --> const ct = require('countries-and-timezones');
+
+ 8. if we want to convert local time to required time zone
+  Ex: var d = new Date();
+      console.log(d.toLocaleString('en-US', { timeZone: 'Mexico/general' }));
+
+ 9. Crypto for hasing the words
+Ex: const crypto = require('crypto');
+
+    const algorithm = 'aes-256-ctr';
+    const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
+    const iv = crypto.randomBytes(16);
+
+    const encrypt = (text) => {
+
+    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+
+    const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+
+    return {
+        iv: iv.toString('hex'),
+        content: encrypted.toString('hex')
+     };
+   };
+   console.log(encrypt())
+
+
+    const decrypt = (hash) => {
+
+    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+
+    const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+
+    return decrpyted.toString();
+   };
+
+   console.log(decrypt({ iv: 'fcf68344d92a046ebafc66110524312f',
+   content: '252b82364fb38d69' }));
+
+ 10.  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;  --> for finding exact character is there or not in a string.
+          regex.test(str);
+
+ 11. if we want to know the device ip address ==> req.connection.remoteAddress
+
+ 12. for finding node modules in the project : 
+ Ex: function npmls(cb) {
+  require('child_process').exec('npm ls --json', function(err, stdout, stderr) {
+    if (err) return cb(err)
+    cb(null, JSON.parse(stdout));
+  });
+}
+npmls(console.log);
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Important Concepts links:
+
+1.https://www.pubnub.com/blog/nodejs-websocket-programming-examples/   --> websockets
+
+2.https://softwareontheroad.com/ideal-nodejs-project-structure/  -->Backend FOlder Structure
+
+3.https://medium.com/iamdeepinder/creating-a-real-time-app-with-angular-8-and-socket-io-with-nodejs-af63bd59a47f   --> Sockets Implementation
+
+4.https://ourcodeworld.com/articles/read/496/how-to-create-a-videochat-with-webrtc-using-peerjs-and-node-js     --> Peerjs example
+
+5. Express validation --> https://express-validator.github.io/docs/custom-validators-sanitizers.html
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Node Modules:
+1. Express Module: create the server --> npm i express 
+2. Http Module : create the server --> npm i http
+3. Body-parser Module: middleware  --> npm i body-parser
+4. Cors module : middleware --> npm i cors
+5. Fs module : reading file streams --> npm i fs
+6. Nodemon module : server auto restart  --> npm i nodemon
+7. Nodemailer module : sending mail --> npm i nodemailer
+8. Moment module : converting required time format --> npm i moment
+9. JsonwebToken : Fon api authentication -- > npm i jsonwebtoken
+10.Peerjs : For one-to-one video conferencing --> npm i peerjs
+11.Socket.io : For sending data from server to client without refreshing --> npm i socket.io
+12.Mongoose : For mongodb creating schema --> npm i mongoose
+13.Mysql : For mysql connection --> npm install mysql
+14.MD5 : For hasing the keyword --> npm install md5
+15.countries-and-timezones : For getting countries and timezones list --> npm install --save countries-and-timezones
+16.Crypto Module : For hashing the words --> npm i crypto
+17. file uploading into s3 bucket : https://stackoverflow.com/questions/28018855/upload-a-file-to-amazon-s3-with-nodejs
+18. If we want to check the code format --> npx eslint folder/filename  -->need to install the eslint module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Angular Modules:
+1. Toast Module: It shows like a push Notificatios --> npm install ngx-toastr --save
+2. 
+
+
+
+
+............................................................................................................................................................................................................
+Backend Response Status Codes :
+    102 --> It indicates that the server has received and is processing the request, but no response is available.
+    200 --> used for get and put http methods.
+    201 --> new data was inserted sucessfuly used for post and put methods.
+    204 --> there is no content fetched by this request
+    300 --> this request is more than one possible response
+    401 --> unauthorized login
+    403 --> client does not have login rights so can't access information.
+    500 --> internal server error
+    503 --> service unavailable due to maintenance
+
+
+.............................................................................................................................................................................................................
+
+Redis Database :
+
+1. SET name gowrav
+
+2. GET name         ----> return always string else error will coming
+
+3. EXIST name
+
+4. DEL name
+
+5. EXPIRE command is used to expire the KEY after a certain time
+ EX: SET name swaroop
+     EXPIRE NAME 60
+
+6.EXPIREAT command is used to expire the KEY based on a timestamp
+ EX: SET name swarooop
+     EXPIREAT NAME 22323234
+
+7.RENAME command is used to change the name of existing key
+ EX: SET name anna
+     RENAME name naming
+
+8.TYPE command is used to know the data type value stored in the key
+ EX: SET name swaroop
+     TYPE name
+
+9.GETSET command sets the specified string value in Redis key and returns its old value
+ EX: GETSET newkey gowravrahul 
+
+10. MGET command is used for get all specified key values
+ EX: SET key1 rahul
+     SET key2 gowrav
+     SET key3 pentakota
+     SET key4 vizag
+   
+     MGET key1 key2 key3 key4 
+
+11. STRLEN command is used to get the length of the value of key 
+ EX: SET name "hello world"
+     STRLEN name
+
+12. MSET command is used to set multiple values to multiple keys
+ EX: SET key1 value1 key2 value2 key3 value3 key4 value4 keyN valueN
+
+13. INCR command is used to increment the integer value of a key by one
+ EX: SET visitors 100
+     INCR visitors 
+     GET visitors
+
+14. INCRBY command is used to increament the value of a key by a specified value
+ EX: SET visitors 100
+     INCRBY visitors 5
+     GET visitors            --> 105
+
+15. DECR command is used to decreament the value by one
+ EX: SET students 100
+     DECR students
+     GET students            --> 99
+
+16. DECRBY command is used to decreament the value of a key by a specified value
+ EX: SET students 100
+     DECRBY students 5
+     GET students            --> 95
+
+17.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SOCKETS : 
+--> server side Reserved Events : 
+Connect
+Message
+Disconnect
+Reconnect
+Ping
+Join 
+Leave
+
+--> Client side Reserved Events
+Connect
+Connect_error
+Connect_timeout
+Reconnect
+
+-->socket.emit ==> means sending message to all clients including emitter.
+
+-->socket.brodcast ==> means sending message to all clients excluding emitter.
+
+1. socket.on('connection', function(data){
+   console.log(data);
+  });
+
+2. socket.on("disconnect", function (data) {
+        console.log("user disconnected",data);
+    });
+
+3. socket.on('join', function (data) {
+   console.log(data);
+   });
+
+4. socket.on('file',function(stream,data){
+   console.log(data);
+   });
+
+5. socket.on('file notify', function (data) {
+        console.log(data);
+   }):
+
+6. some examples for emiting data
+
+sending to sender-client only
+socket.emit('message', "this is a test");
+
+// sending to all clients, include sender
+io.emit('message', "this is a test");
+
+// sending to all clients except sender
+socket.broadcast.emit('message', "this is a test");
+
+// sending to all clients in 'game' room(channel) except sender
+socket.broadcast.to('game').emit('message', 'nice game');
+
+// sending to all clients in 'game' room(channel), include sender
+io.in('game').emit('message', 'cool game');
+
+// sending to sender client, only if they are in 'game' room(channel)
+socket.to('game').emit('message', 'enjoy the game');
+
+// sending to all clients in namespace 'myNamespace', include sender
+io.of('myNamespace').emit('message', 'gg');
+
+// sending to individual socketid
+socket.broadcast.to(socketid).emit('message', 'for your eyes only');
+
+// list socketid
+for (var socketid in io.sockets.sockets) {}
+ OR
+Object.keys(io.sockets.sockets).forEach((socketid) => {});
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nodejs Routes : 
+
+// // app.js file
+// require('./Routes/route')(app)              // Routes is the folder and route is the file.
+
+
+// // routes.js file
+// var Signup = require('../Signup/SignupController');
+// var Dashboard = require('../Dashboard/DashboardController')
+
+
+// module.exports = (app)=>{
+// app.post('/Logindata',Signup.loginChecking);
+// app.post('/QuizHistory',Dashboard.quizHistoryy);
+// }
+
+-------------------------------------------------------------------------------------------------- aws file uploading ---------------------------------------------------------------------------------------
+
+AWS File Uploading : https://www.codota.com/code/javascript/functions/aws-sdk/S3/getSignedUrl
+const AWS = require('aws-sdk');
+const fs = require('fs');
+var path = require('path');
+const https = require('https'); 
+const stream = require('stream');
+const indexing = require('../../config/index');
+const message = require('../../serverMessageResponse');
+const ID = indexing.aws.key;
+const SECRET = indexing.aws.secret;
+const BUCKET_NAME = indexing.s3.bucket;
+
+const s3 = new AWS.S3({
+  accessKeyId: ID,
+  secretAccessKey: SECRET,
+});
+
+// const params = {
+//   Bucket: BUCKET_NAME,
+//   CreateBucketConfiguration: {
+//    LocationConstraint: 'eu-west-1',
+//   }
+// };
+
+// s3.createBucket(params, function(err, data) {
+//   if (err) console.log(err, err.stack);
+//   else console.log('Bucket Created Successfully', data.Location);
+// });
+
+/* UPLOADING FILE INTO S3 BUCKET */
+exports.fileUpload = async function(filename) {
+  console.log("fileuploading.......")
+   var fileName = '/home/gowrav_pentakota/Music/129066853_1613638096665.pdf';
+  try {
+    const fileContent = fs.readFileSync(fileName);
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: fileName,
+      Body: fileContent,
+      ACL:'public-read',
+    };
+    s3.upload(params, function(err, data) {
+      if (err) {
+        throw err;
+      }
+      console.log(`File uploaded successfully`, data);
+      // return res.status(200).json({ResponseMessage: message.serverResponseMessage.S3_Bucket_File_Upload});
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
+/* FILE DOWNLOAD FROM AWS S3 BUCKET */   
+exports.fileDownloding = function(fileKey, res) {
+  console.log("file downloading...........",fileKey)
+  try {
+    const s3 = new AWS.S3({
+      accessKeyId: ID,
+      secretAccessKey: SECRET,
+    });
+    const options = {
+      Bucket: BUCKET_NAME,                  
+      Key: fileKey,
+    };
+
+    s3.getSignedUrl('getObject',options, (error, url) => {
+      if (error) {
+          console.log(error);
+      }
+      console.log('URL:', url);
+  });
+  } catch (error) {
+    return error;
+  }
+};
+
+/* FILE DELETE FROM S3 BUCKET */
+exports.fileDeleting = function(fileKey) {
+  try {
+    const s3 = new AWS.S3({
+      accessKeyId: ID,
+      secretAccessKey: SECRET,
+    });
+    const options = {
+      Bucket: BUCKET_NAME,                  
+      Key: fileKey,
+    };
+    // s3.deleteObject(options, function(err, deleteRes) {
+    //   console.log('deleteRes', deleteRes);
+    // });
+    s3.getSignedUrl('deleteObject', options, (error, resUrl) => {
+      if (error) {
+        throw error;
+      }
+      console.log('Delete URL:', resUrl);
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
+
+/* This is for retrieving the uploaded files object from s3 bucket */
+s3.listObjects({Bucket: BUCKET_NAME}, function(err, data) {
+console.log('s3 bucket files objects', data);
+});
+
+-------------------------------------------------------------------------------------------------pagination-------------------------------------------------------------------------------------------------
+exports.usersList = async function(req, res) {
+  try {
+    let perPage = 2;
+    const page = Math.max(0, req.body.page);
+    console.log("page",page);
+    if (req.body.perPage) {
+      perPage = req.body.perPage;
+    }
+    const pagination = {skip: perPage * page, limit: perPage};
+    console.log("pagination",pagination)
+    const whereArr = {};
+    if (req.body.search) {
+      whereArr['userName'] = {$regex: '^' + req.body.search, $options: 'i'};
+      console.log("whereArr",whereArr);
+    } 
+    userCreate.countDocuments(whereArr, async function(err, count) {
+    var data =  await userCreate.find(whereArr, {}, pagination).sort({updatedAt: -1})
+    const response = {};
+        response['data'] = data;
+        response['totalpage'] = Math.ceil(count/perPage);
+        response['perpage'] = perPage;
+        response['total'] = count;
+        return res.json(response);
+  });
+  } catch (error) {
+    console.log('error', error);
+    return res.json(response.failure(204, message.serverResponseMessage.Catch_Error, error));
+  }
+};
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+POSTGRES:
+1. Links : https://sequelize.org/v5/manual/models-usage.html
+2. Links : https://sequelize.org/v4/manual/tutorial/querying.html
+
+// webm to mp4 converter: https://cloudconvert.com/webm-to-mp4
+
+// normal link :  http://localhost/livechat/index2.html?orderId=101&userId=1&userName=John%20Watson&vendorId=200&vendorName=Factory%20Representative
+
+// https://git.brainvire.com/php/supermelonnode
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Stripe Payment Gateway:
+ 1. Stripe loign test link : https://api.stripe.com
+ 2. Expanding Responses
+ 3. Idempotent Requests
+ 4. Retrieve balance : stripe.balance.retrieve(function(err, balance) { });
+ 5. Retrieve a balance transaction : const balanceTransaction = await stripe.balanceTransactions.retrieve( 'txn_1032HU2eZvKYlo2CEPtcnUvl' );  // transction_ID
+ 6. List all balance transactions : const balanceTransactions = await stripe.balanceTransactions.list({ limit: 3, });
+ 7. create a charge : 
+ Ex: const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+      const charge = await stripe.charges.create({
+      amount: 2000,
+      currency: 'usd',
+      source: 'tok_mastercard',
+      description: 'My First Test Charge (created for API docs)',
+    });
+ 8. Retrieve a charge:
+ Ex: const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+     const charge = await stripe.charges.retrieve( 'ch_1JAX8b2eZvKYlo2CRhTjRtO1' );
+ 9. capture charge ? doubt
+ 10. List all charges : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                        const charges = await stripe.charges.list({ limit: 3, });
+
+ 11. Create a customer : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                         const customer = await stripe.customers.create({
+                           description: 'My First Test Customer (created for API docs)',
+                         });
+
+ 12. Retrieve a customer : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                           const customer = await stripe.customers.retrieve( 'cus_AJ6m5vWl7scnn6' );  // id means when creating customer it will generate.
+
+ 13. Delete a customer : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                         const deleted = await stripe.customers.del( 'cus_AJ6m5vWl7scnn6' );
+
+ 14. List all customers : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                          const customers = await stripe.customers.list({ limit: 3, });
+
+ 15. Create a bank account: const stripe = require('stripe')('sk_test_your_key');
+                            const bankAccount = await stripe.customers.createSource( 'cus_AJ6m5vWl7scnn6', {source: 'btok_1JAaQw2eZvKYlo2CbxILO19A'} );
+
+ 16. Retrieve a bank account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+			       const bankAccount = await stripe.customers.retrieveSource('cus_AJ6m5vWl7scnn6', 'ba_1JAXRX2eZvKYlo2CMDgzdkkM' );
+ 
+ 17. Verify a bank account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+			     const bankAccount = await stripe.customers.verifySource(
+				  'cus_AJ6m5vWl7scnn6',
+				  'ba_1JAXRX2eZvKYlo2CMDgzdkkM',
+				  {amounts: [32, 45]}
+				);
+
+ 18. Delete a bank account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                             const deleted = await stripe.customers.deleteSource( 'cus_AJ6m5vWl7scnn6', 'ba_1JAXRX2eZvKYlo2CMDgzdkkM' );
+
+
+ 19. List all bank accounts : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+                              const bankAccounts = await stripe.customers.listSources( 'cus_AJ6m5vWl7scnn6', {object: 'bank_account', limit: 3} );
+
+ 20: Create a card (credit card) : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+				   const card = await stripe.customers.createSource( 'cus_AJ6m5vWl7scnn6', {source: 'tok_mastercard'} );
+
+ 21. Retrieve a card : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+		       const card = await stripe.customers.retrieveSource( 'cus_AJ6m5vWl7scnn6', 'card_1JApG02eZvKYlo2CZmQUfzDn' );
+
+ 22. Update a card : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+		     const card = await stripe.customers.updateSource( 'cus_AJ6m5vWl7scnn6', 'card_1JApG02eZvKYlo2CZmQUfzDn',  {name: 'Jenny Rosen'});
+				  
+ 23. Delete a card : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+		     const deleted = await stripe.customers.deleteSource( 'cus_AJ6m5vWl7scnn6', 'card_1JApG02eZvKYlo2CZmQUfzDn' );			  
+				 
+				
+ 24. Create an account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+			 const account = await stripe.accounts.create({
+			  type: 'custom',
+			  country: 'US',
+			  email: 'jenny.rosen@example.com',
+			  capabilities: {
+			    card_payments: {requested: true},
+			    transfers: {requested: true},
+			  },
+			});
+
+ 25. Retrieve account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+			const account = await stripe.accounts.retrieve( 'acct_1032D82eZvKYlo2C' );
+
+
+ 26. Create a external bank account : const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+				      const bankAccount = await stripe.accounts.createExternalAccount(
+					  'acct_1032D82eZvKYlo2C',
+					  {
+					    external_account: 'btok_1JApG12eZvKYlo2CkhcM0zeg',
+					  }
+					);
+
+ 27. 
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Server Commands :
+
+
+
